@@ -19,16 +19,8 @@ gobck2.addEventListener('click', () => {
     ChangeTabs(0);
 });
 
-gobck3.addEventListener('click', () => {
-    ChangeTabs(0);
-});
-
 addnew.addEventListener('click', () => {
     ChangeTabs(1);
-});
-
-joinin.addEventListener('click', () => {
-    ChangeTabs(2);
 });
 
 
@@ -40,8 +32,8 @@ scores.addEventListener('click', () => {
     TournamentAddScores();
 });
 
-joinup.addEventListener('click', () => {
-    TournamentJoin();
+change.addEventListener('click', () => {
+    TournamentJoinOrLeave();
 });
 
 logout.addEventListener('click', () => {
@@ -51,11 +43,9 @@ logout.addEventListener('click', () => {
 function ChangeTabs(tabno) {
     document.getElementById("FieldMain").style.display   = "none";
     document.getElementById("FieldCreate").style.display = "none";
-    document.getElementById("FieldJoin").style.display   = "none";
     document.getElementById("FieldStats").style.display  = "none";
     document.getElementById("NavMain").style.display     = "none";
     document.getElementById("NavCreate").style.display   = "none";
-    document.getElementById("NavJoinIn").style.display   = "none";
     document.getElementById("NavStats").style.display    = "none";
 
     switch (tabno) {
@@ -163,8 +153,7 @@ function TournamentCreate() {
 
 function SeeTable(itemno) {
     let activeuser = JSON.parse(sessionStorage.getItem('activeUser'));
-    let allUserTourns = [];
-    allUserTourns = activeuser.tourns;
+    const selectedTourn = activeuser.tourns[itemno];
 
     const allTournItems = document.getElementById("FieldStats");
     allTournItems.innerHTML = "";
@@ -174,38 +163,15 @@ function SeeTable(itemno) {
     const tournitem1 = document.createElement("div");    // name of tournament
     const tournitem2 = document.createElement("div");    // all matches with score
     const tournitem3 = document.createElement("div");    // score update field
-    const tournitem4 = document.createElement("button"); // score update button
-    const tournitem5 = document.createElement("button"); // leave tourney button
-    const tournitem6 = document.createElement("button"); // go back button
 
 
     tournitem1.className = "tournName";
     tournitem2.className = "tournMatches";
     tournitem3.className = "tournEnterScore";
 
-    tournitem4.className = "updateScore";
-    tournitem4.type = "button";
-    let attributeNameB1 = "TournamentAddScores()";
-    tournitem4.setAttribute("onclick", attributeNameB1);
+    tournitem1.innerHTML = selectedTourn[0];
 
-    tournitem5.className = "leaveTourney";
-    tournitem5.type = "button";
-    let attributeNameB2 = "TournamentLeave(" + itemno + ")";
-    tournitem5.setAttribute("onclick", attributeNameB2);
-
-    tournitem6.className = "goBack";
-    tournitem6.type = "button";
-    let attributeNameB3 = "ChangeTabs(0)";
-    tournitem6.setAttribute("onclick", attributeNameB3);
-
-
-    const tournpart1 = document.createTextNode(tourn[0]);
-    const tournpart2 = document.createTextNode(tourn[2]);
-    const tournpart3 = document.createTextNode("view");
-
-    tournitem1.appendChild(tournpart1);
-    tournitem2.appendChild(tournpart2);
-    tournitem3.appendChild(tournpart3);
+    // CONTINUE FROM HERE
 
     tournitem0.appendChild(tournitem1);
     tournitem0.appendChild(tournitem2);
@@ -224,14 +190,15 @@ function TournamentAddScores() {
 }
 
 
-// Join Selected Tournament
+// Join or Leave Selected Tournament
+
+function TournamentJoinOrLeave() {
+
+}
 
 function TournamentJoin() {
 
 }
-
-
-// Leave Tournament
 
 function TournamentLeave(itemno) {
     const confirmation = confirm("Are you sure you want to leave the tournament?");
