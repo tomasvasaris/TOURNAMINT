@@ -69,10 +69,6 @@ function ChangeTabs(tabno) {
             document.getElementById("NavCreate").style.display   = "block";
             break;
         case 2:
-            document.getElementById("FieldJoin").style.display   = "block";
-            document.getElementById("NavJoinIn").style.display   = "block";
-            break;
-        case 3:
             document.getElementById("FieldStats").style.display  = "block";
             document.getElementById("NavStats").style.display    = "block";
             break;
@@ -221,14 +217,14 @@ function SeeTable(itemno) {
 }
 
 
-// Add Scores to selected Tournament
+// Add Scores to Selected Tournament
 
 function TournamentAddScores() {
 
 }
 
 
-// Join Existing Tournament
+// Join Selected Tournament
 
 function TournamentJoin() {
 
