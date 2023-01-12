@@ -2,8 +2,7 @@ submit.addEventListener('click', () => {
     let firstname = document.getElementById("firstname").value;
     let lastname  = document.getElementById("lastname").value;
     let email  = document.getElementById("email").value;
-    let newarr = [];
-    let user = {firstName: firstname, lastName: lastname, eMail: email, tourns: newarr};
+    let user = {firstName: firstname, lastName: lastname, eMail: email};
     let lenght = localStorage.length;
 
     if(firstname === "" || lastname === "" || email === "") {

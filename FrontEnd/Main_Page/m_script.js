@@ -71,44 +71,46 @@ function ChangeTabs(tabno) {
 // See All Active Tournaments
 
 function TournamentView() {
-    let activeuser = JSON.parse(sessionStorage.getItem('activeUser'));
-    let allUserTourns = [];
-    allUserTourns = activeuser.tourns;
+    let tourneyList = [];
+    
+    if (JSON.parse(localStorage.getItem(0)) !== null) {
+        tourneyList = JSON.parse(localStorage.getItem(0));
 
-    const allTournItems = document.getElementById("FieldMain");
-    allTournItems.innerHTML = "";
-    tournCount=0;
-
-    allUserTourns.forEach(tourn => {
-        const tournitem0 = document.createElement("p");
-        const tournitem1 = document.createElement("span");
-        const tournitem2 = document.createElement("span");
-        const tournitem3 = document.createElement("button");
-
-        tournitem1.className = "lspan";
-        tournitem2.className = "rspan";
-
-        tournitem3.className = "openit";
-        tournitem3.type = "button";
-        let attributeName = "SeeTable(" + tournCount + ")";
-        tournitem3.setAttribute("onclick", attributeName);
-
-        const tournpart1 = document.createTextNode(tourn[0]);
-        const tournpart2 = document.createTextNode(tourn[2]);
-        const tournpart3 = document.createTextNode("view");
-
-        tournitem1.appendChild(tournpart1);
-        tournitem2.appendChild(tournpart2);
-        tournitem3.appendChild(tournpart3);
-
-        tournitem0.appendChild(tournitem1);
-        tournitem0.appendChild(tournitem2);
-        tournitem0.appendChild(tournitem3);
-
-        allTournItems.appendChild(tournitem0);
-
-        tournCount++;
-    })
+        const allTournItems = document.getElementById("FieldMain");
+        allTournItems.innerHTML = "";
+        tournCount=0;
+    
+        tourneyList.forEach(tourn => {
+            const tournitem0 = document.createElement("p");
+            const tournitem1 = document.createElement("span");
+            const tournitem2 = document.createElement("span");
+            const tournitem3 = document.createElement("button");
+    
+            tournitem1.className = "lspan";
+            tournitem2.className = "rspan";
+    
+            tournitem3.className = "openit";
+            tournitem3.type = "button";
+            let attributeName = "SeeTable(" + tournCount + ")";
+            tournitem3.setAttribute("onclick", attributeName);
+    
+            const tournpart1 = document.createTextNode(tourn[0]);
+            const tournpart2 = document.createTextNode(tourn[2]);
+            const tournpart3 = document.createTextNode("view");
+    
+            tournitem1.appendChild(tournpart1);
+            tournitem2.appendChild(tournpart2);
+            tournitem3.appendChild(tournpart3);
+    
+            tournitem0.appendChild(tournitem1);
+            tournitem0.appendChild(tournitem2);
+            tournitem0.appendChild(tournitem3);
+    
+            allTournItems.appendChild(tournitem0);
+    
+            tournCount++;
+        })
+    }
 }
 
 
@@ -118,33 +120,28 @@ function TournamentCreate() {
     let tourName = document.getElementById("newName").value;
     let tourType = document.getElementById("newType").value;
     let tourDate = document.getElementById("newDate").value;
+    
+    let tourParticipants = [];
+    tourParticipants.push(JSON.parse(sessionStorage.getItem('activeUser')));
 
     if (tourName === "" || tourType === "" || tourDate === "") {
         alert('All fields need to be filled in!');
 
     } else {
 
-        let tourney = [tourName, tourType, tourDate];
-        let userno = JSON.parse(sessionStorage.getItem('activeUserID'));
-        let user = JSON.parse(sessionStorage.getItem('activeUser'));
-    
-        let newTourns = [];
-        newTourns = user.tourns;
-        newTourns.push(tourney);
-    
-        let updatedUser = {
-            firstName: user.firstName, 
-            lastName: user.lastName, 
-            eMail: user.eMail, 
-            tourns: newTourns
-        };
-    
-        localStorage.setItem(userno, JSON.stringify(updatedUser));
-        sessionStorage.setItem('activeUser', JSON.stringify(updatedUser));
+        let tourney = [tourName, tourType, tourDate, tourParticipants];
+        let tourneyList = [];
+
+        if (JSON.parse(localStorage.getItem(0)) !== null) {
+            tourneyList = JSON.parse(localStorage.getItem(0));
+        }
+
+        tourneyList.push(tourney);
+        localStorage.setItem(0, JSON.stringify(tourneyList));
     
         document.getElementById("newName").value = "";
-        tourndate = document.getElementById("newDate").value = "";
-        ChangeTabs(0);
+        document.getElementById("newDate").value = "";
+        ChangeTabs(0);        
     }
 }
 
@@ -152,18 +149,17 @@ function TournamentCreate() {
 // See Tournament Table and Statistics
 
 function SeeTable(itemno) {
-    let activeuser = JSON.parse(sessionStorage.getItem('activeUser'));
-    const selectedTourn = activeuser.tourns[itemno];
+    let tourneyList = JSON.parse(localStorage.getItem(0));
+    const selectedTourn = tourneyList[itemno];
 
     const allTournItems = document.getElementById("FieldStats");
     allTournItems.innerHTML = "";
     tournCount=0;
     
-    const tournitem0 = document.createElement("p");      // the main block
-    const tournitem1 = document.createElement("div");    // name of tournament
-    const tournitem2 = document.createElement("div");    // all matches with score
-    const tournitem3 = document.createElement("div");    // score update field
-
+    const tournitem0 = document.createElement("p");    // the main block
+    const tournitem1 = document.createElement("div");  // name of tournament
+    const tournitem2 = document.createElement("div");  // all matches with score
+    const tournitem3 = document.createElement("div");  // score update field
 
     tournitem1.className = "tournName";
     tournitem2.className = "tournMatches";
@@ -171,7 +167,11 @@ function SeeTable(itemno) {
 
     tournitem1.innerHTML = selectedTourn[0];
 
-    // CONTINUE FROM HERE
+    tournitem2.innerHTML = selectedTourn[3].forEach(player => {
+        selectedTourn[3].forEach(player => {
+        
+        });
+    });
 
     tournitem0.appendChild(tournitem1);
     tournitem0.appendChild(tournitem2);

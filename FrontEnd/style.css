@@ -41,7 +41,7 @@ button {
     width: 100px;
 }
 
-button.open {
+button.openit {
     background-color: #CBEDD5;
     border: none;
     color: hsl(0, 0%, 100%);
