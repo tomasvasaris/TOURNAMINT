@@ -1,0 +1,79 @@
+Datos:  sausio 17 d. ir sausio 18 d. vyks Jūsų atsiskaitymai.
+Egzaminus turite išlaikyti ne mažiau nei 7, tai žemiausias teigiamas pažymys. 
+Teorijos egzaminas bus vykdomas testo principu su įvairiausiais klausimais (atvirais ir uždarais).
+Paraktikos egzaminą sudaro projektas, kurį Jūs pradėsite ruošti likus kuriam laikui iki finišo.
+Diplomai. Juos PDF formatu atsiųsime kiekvienam asmeniškai el. paštu per 2-3 savaites nuo studijų pabaigos datos. 
+
+
+Galutinis Egzaminas
+Due January 17, 2023 6:00 PM
+
+Parašyta veikianti programa vadovaujantis reikalavimais	5 taškai
+Tvarkingi GIT commit‘ai ir branchai			1 taškas
+Kodas vadovaujasi „Best Coding Practices“		1 taškas
+Tvarkinga dokumentacija ir teisingas logingas		1 taškas
+Tvarkinga Frontend pusė					1 taškas
+UnitTest coverage (MOQ+InMemory DB)			1 taškas
+
+Git repo pridėkite prie atsiųstų darbų
+Reikalavimus rasite priede
+
+
+
+TOURNAMINT: Game Tournament Result Tracker e-System. Functions:
+• Supports Round Robin tournament format (everyone plays against everyone once)
+• Users register and are able to create or join already running tournaments
+• Users log and see their score, wins and loses at any time
+• POTENTIAL: Single-elimination and Double-elimination formats (for 4/8/16/32/64 players)
+• POTENTIAL: Tracking previous tournament statistics / statistics over all tournaments
+• POTENTIAL: Private tournaments (tournament that require a code to join)
+
+
+FROTNEND requirements:
+• HTML
+• HTML Forms
+• CSS
+• CSS Styling fle•bo•
+  JS Async/Promise
+  JS Fetch
+• JS Dom manipulation
+• JS Event Listeners
+• LocalStorage
+• Registracija+Login+Logout
+• Navbar
+• Tvarkinga HTML struktūra
+• Kiek galima tvarkingesnis CSS ir JS kodas
+
+GIT requirements:
+• Commit‘ai turi būti lengvai suprantami iš message
+• Rekomenduojama naudoti branchus
+• Galit naudoti betkurį GIT įrankį, bet rekomenduotina GitHub+VisualStudio integracija
+• Branchų vardai turi atitikti tuo metu sprendžiamą problemą arba implementuojamą feature
+
+Web API requirements:
+Unit test coverage (Visi servisai,actionai privalo būti patestuoti)
+Privalo būti panaudotas MOQ ir InMemory DB
+Dependancy Invertion Principle(Viskas turi naudoti interface'us)
+Turi būti loggingas
+DRY (don't repeat yourself)
+Swagger dokumentacija
+Autentikacija+Autorizacija
+Rolės kaip rekomendacija, bet nebūtinybė
+Broken Access Control (Kad useris negaletu prisijungti ne savo vardu, claim missuse)
+Sistema privalo palaikyti asinchroninę komunikaciją
+Privalot stengtis naudoti generic sprendimus ten kur matot potencialą sudėlioti labiau generic kodą
+Rekomenduotina panaudoti bent vieną PATCH endpointą
+Tvarkingi controlleriai (Jei controlleris vadinas User tai turėtų dirbti tik su User (SINGLE RESPONSIBILITY PRINCIPLE)
+ModelState, Attribute validation
+Turi būti nurodoma parametrų kilmė (Pvz: [FromBody])
+
+DB requirements:
+Unit test coverage (Visi servisai,actionai privalo būti patestuoti)
+Privalo būti panaudotas MOQ ir InMemory DB
+Dependancy Invertion Principle(Viskas turi naudoti interface'us)
+Turi būti loggingas
+DRY (don't repeat yourself)
+Swagger dokumentacija
+Autentikacija+Autorizacija
+Rolės kaip rekomendacija, bet nebūtinybė
+Broken Access Control (Kad useris negaletu prisijungti ne savo vardu, claim missuse)

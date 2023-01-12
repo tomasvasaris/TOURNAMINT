@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="CA Final Work" />
+    <meta name="keywords" content="CA, CodeAcademy, Tournamint" />
+    <meta name="author" content="Tomas Bingelis" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournamint</title>
+
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body onload="mainLoad()">
+
+    <!-- Application Headline -->
+    <div class="headline">
+        <h1>TOURNAMINT<img src="../mint.png" atl="logo" width="20"/></h1>
+        <h2 id="hh"></h2>
+    </div>
+
+    <br/>
+
+    
+    <!-- Main Information Field (List of Active Tournaments) -->
+    <div id="FieldMain" style="display: block;">
+        
+    </div>
+
+    <!-- Individual Tournament Information/Statistics Field -->
+    <div id="FieldStats" style="display: none;">
+        
+    </div>
+
+    <!-- Create New Tourney -->
+    <div class="info" id="FieldCreate" style="display: none;">
+        <label for="name">Name: </label>
+        <input type="text" id="newName" minlength="1" maxlength="50"/> <br/>
+
+        <label for="type">Type: </label>
+        <select name="type" id="newType">
+          <option value="robin" selected>Round Robin</option>
+          <!-- <option value="single">Single-Elimination</option>  // FUTURE FEATURE -->
+          <!-- <option value="double">Double-Elimination</option>  // FUTURE FEATURE -->
+        </select> <br/>
+
+        <label for="date">Deadline: </label>
+        <input type="datetime" id="newDate" min="2000-01-01" max="3000-01-01"/> <br/>
+    </div>
+
+
+    <!-- Navigation Field -->
+    <div class="presser"> <br/>
+        <div id="NavMain" style="display: block;">
+            <button id="addnew" type="button">CREATE</button>
+            <button id="joinin" type="button">JOIN</button>
+            <button id="logout" type="button">LOGOUT</button>
+        </div>
+
+        <div id="NavCreate" style="display: none;">
+            <button id="create" type="button">CREATE</button>
+            <button id="gobck1" type="button">GO BACK</button>
+        </div>
+
+        <div id="NavStats" style="display: none;">
+            <button id="scores" type="button">ADD SCORE</button>
+            <button id="gobck2" type="button">GO BACK</button>
+        </div>
+    </div>
+    
+    <script src="m_script.js"></script>
+</body>
+</html>
