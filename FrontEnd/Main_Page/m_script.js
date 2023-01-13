@@ -123,7 +123,7 @@ function TournamentCreate() {
         alert('All fields need to be filled in!');
 
     } else {
-        let tourney = {Name: tourName, Type: tourType, Date: tourDate, Players: tourParticipants};
+        let tourney = {Name: tourName, Type: tourType, Date: tourDate, Players: tourParticipants, Matches: []};
         let tourneyList = [];
 
         if (JSON.parse(localStorage.getItem(0)) !== null) {
@@ -162,7 +162,7 @@ function SeeTable(itemno) {
 
     tournitem1.innerHTML = selectedTourn.Name;
 
-    let tournTable = "";
+    const tournTable = "";
     selectedTourn.Players.forEach(player1 => {
         selectedTourn.Players.forEach(player2 => {
             if (player1.firstName === user.firstName && player1.lastName === user.lastName) {
@@ -177,7 +177,7 @@ function SeeTable(itemno) {
                 tournTable = tournTable + player2.firstName + " " + player2.lastName + "<br/>";
             }
         });
-
+        tournTable = tournTable + "<br/>";
     });
     tournitem2.innerHTML = tournTable
 
