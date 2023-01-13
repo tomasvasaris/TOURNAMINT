@@ -1,7 +1,9 @@
 // Startup. Display user name and update Tournament List
 
+var user = JSON.parse(sessionStorage.getItem('activeUser'));
+var userno = JSON.parse(sessionStorage.getItem('activeUserID'));
+
 function mainLoad(){
-    let user = JSON.parse(sessionStorage.getItem('activeUser'));
     let username = user.firstName + " " + user.lastName;
     document.getElementById("hh").innerHTML = "･ﾟ: *✧ " + username + " ✧* :ﾟ･";
 
@@ -30,10 +32,6 @@ create.addEventListener('click', () => {
 
 scores.addEventListener('click', () => {
     TournamentAddScores();
-});
-
-change.addEventListener('click', () => {
-    TournamentJoinOrLeave();
 });
 
 logout.addEventListener('click', () => {
@@ -119,13 +117,12 @@ function TournamentCreate() {
     if (tourType === "robin") {tourType = "Round Robin";}
     
     let tourParticipants = [];
-    tourParticipants.push(JSON.parse(sessionStorage.getItem('activeUser')));
+    tourParticipants.push(user);
 
     if (tourName === "" || tourType === "" || tourDate === "") {
         alert('All fields need to be filled in!');
 
     } else {
-
         let tourney = {Name: tourName, Type: tourType, Date: tourDate, Players: tourParticipants};
         let tourneyList = [];
 
@@ -148,6 +145,7 @@ function TournamentCreate() {
 function SeeTable(itemno) {
     let tourneyList = JSON.parse(localStorage.getItem(0));
     const selectedTourn = tourneyList[itemno];
+    selectedTourNo = itemno;
 
     const allTournItems = document.getElementById("FieldStats");
     allTournItems.innerHTML = "";
@@ -164,11 +162,24 @@ function SeeTable(itemno) {
 
     tournitem1.innerHTML = selectedTourn.Name;
 
-    tournitem2.innerHTML = selectedTourn.Players.forEach(player => {
-        selectedTourn.Players.forEach(player => {
-        
+    let tournTable = "";
+    selectedTourn.Players.forEach(player1 => {
+        selectedTourn.Players.forEach(player2 => {
+            if (player1.firstName === user.firstName && player1.lastName === user.lastName) {
+                isParticipant = true;
+            }
+            if (player1.firstName !== player2.firstName || player1.lastName !== player2.lastName) {
+                let score = "0/0";
+
+
+                tournTable = tournTable + player1.firstName + " " + player1.lastName;
+                tournTable = tournTable + " " + score + " " ;
+                tournTable = tournTable + player2.firstName + " " + player2.lastName + "<br/>";
+            }
         });
+
     });
+    tournitem2.innerHTML = tournTable
 
     tournitem0.appendChild(tournitem1);
     tournitem0.appendChild(tournitem2);
@@ -176,6 +187,7 @@ function SeeTable(itemno) {
 
     allTournItems.appendChild(tournitem0);
 
+    ChangeJoinOrLeaveButton();
     ChangeTabs(2);
 }
 
@@ -189,43 +201,48 @@ function TournamentAddScores() {
 
 // Join or Leave Selected Tournament
 
-function TournamentJoinOrLeave() {
+var isParticipant = false;
+var selectedTourNo;
 
+function ChangeJoinOrLeaveButton() {
+    let button = document.getElementById("change");
+    button.removeAttribute("onclick");
+
+    if (isParticipant === true) {
+        button.innerHTML = "Leave";
+        button.setAttribute("onclick", "TournamentLeave(" + selectedTourNo + ")");
+        isParticipant = false;
+
+    } else {
+        button.innerHTML = "Join In";
+        button.setAttribute("onclick", "TournamentJoin(" + selectedTourNo + ")");
+    }
 }
 
 function TournamentJoin() {
-
+    const allTourns = JSON.parse(localStorage.getItem(0));
+    allTourns[selectedTourNo].Players.push(user);
+    localStorage.setItem(0, JSON.stringify(allTourns));
+    SeeTable(selectedTourNo);
 }
 
-function TournamentLeave(itemno) {
+function TournamentLeave() {
     const confirmation = confirm("Are you sure you want to leave the tournament?");
 
     if(confirmation === true) {
-        let activeuser = JSON.parse(sessionStorage.getItem('activeUser'));
-        let userno = JSON.parse(sessionStorage.getItem('activeUserID'));
-        let allUserTourns = [];
-        let allUserTournsNew = [];
-        allUserTourns = activeuser.tourns;
-        tourncount=0;
+        const allTourns = JSON.parse(localStorage.getItem(0));
+        const allPlayers = allTourns[selectedTourNo].Players;
+        const allPlayersNew = [];
     
-        allUserTourns.forEach(tourn => {
-            if (tourncount !== itemno) {
-                allUserTournsNew.push(tourn);
+        allPlayers.forEach(player => {
+            if (player.firstName !== user.firstName && player.lastName !== user.lastName ) {
+                allPlayersNew.push(player);
             }
-            tourncount++;
         });
     
-        let updatedUser = {
-            firstName: activeuser.firstName, 
-            lastName: activeuser.lastName, 
-            eMail: activeuser.eMail, 
-            tourns: allUserTournsNew
-        };
-    
-        localStorage.setItem(userno, JSON.stringify(updatedUser));
-        sessionStorage.setItem('activeUser', JSON.stringify(updatedUser));
-        
-        ChangeTabs(0);
+        allTourns[selectedTourNo].Players = allPlayersNew;
+        localStorage.setItem(0, JSON.stringify(allTourns));
+        SeeTable(selectedTourNo);
     }
 }
     
