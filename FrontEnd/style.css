@@ -16,12 +16,19 @@ div.headline {
     color: grey;
     position: sticky;
     left: 50%;
-    margin: 20px;
+    margin-bottom: 40px;
+}
+
+div.tournName {
+    color: #439A97;
+    margin: 0px;
+    font-size: 20px;
+    margin: 30px;
 }
 
 h1 {
     color: #439A97;
-    margin: 0px;
+    margin: 20px;
 }
 
 h2 {

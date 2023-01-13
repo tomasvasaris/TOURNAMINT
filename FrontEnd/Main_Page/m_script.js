@@ -162,7 +162,7 @@ function SeeTable(itemno) {
 
     tournitem1.innerHTML = selectedTourn.Name;
 
-    const tournTable = "";
+    let tournTable = "";
     selectedTourn.Players.forEach(player1 => {
         selectedTourn.Players.forEach(player2 => {
             if (player1.firstName === user.firstName && player1.lastName === user.lastName) {
