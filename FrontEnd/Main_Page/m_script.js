@@ -83,28 +83,23 @@ function TournamentView() {
         tourneyList.forEach(tourn => {
             const tournitem0 = document.createElement("p");
             const tournitem1 = document.createElement("span");
-            const tournitem2 = document.createElement("span");
-            const tournitem3 = document.createElement("button");
+            const tournitem2 = document.createElement("button");
     
-            tournitem1.className = "lspan";
-            tournitem2.className = "rspan";
+            tournitem1.className = "nameSpan";
     
-            tournitem3.className = "openit";
-            tournitem3.type = "button";
+            tournitem2.className = "openit";
+            tournitem2.type = "button";
             let attributeName = "SeeTable(" + tournCount + ")";
-            tournitem3.setAttribute("onclick", attributeName);
+            tournitem2.setAttribute("onclick", attributeName);
     
-            const tournpart1 = document.createTextNode(tourn[0]);
-            const tournpart2 = document.createTextNode(tourn[2]);
-            const tournpart3 = document.createTextNode("view");
+            const tournpart1 = document.createTextNode(tourn.Name);
+            const tournpart2 = document.createTextNode("view");
     
             tournitem1.appendChild(tournpart1);
             tournitem2.appendChild(tournpart2);
-            tournitem3.appendChild(tournpart3);
     
             tournitem0.appendChild(tournitem1);
             tournitem0.appendChild(tournitem2);
-            tournitem0.appendChild(tournitem3);
     
             allTournItems.appendChild(tournitem0);
     
@@ -167,10 +162,10 @@ function SeeTable(itemno) {
     tournitem2.className = "tournMatches";
     tournitem3.className = "tournEnterScore";
 
-    tournitem1.innerHTML = selectedTourn[0];
+    tournitem1.innerHTML = selectedTourn.Name;
 
-    tournitem2.innerHTML = selectedTourn[3].forEach(player => {
-        selectedTourn[3].forEach(player => {
+    tournitem2.innerHTML = selectedTourn.Players.forEach(player => {
+        selectedTourn.Players.forEach(player => {
         
         });
     });
@@ -181,7 +176,7 @@ function SeeTable(itemno) {
 
     allTournItems.appendChild(tournitem0);
 
-    ChangeTabs(3);
+    ChangeTabs(2);
 }
 
 

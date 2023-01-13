@@ -79,12 +79,9 @@ span {
     margin: 15px;
 }
 
-span.lspan {
-    text-align: center;
-    text-decoration: none;
-}
-
-span.rspan {
-    text-align: center;
-    text-decoration: none;
+span.nameSpan {
+    height: 30px;
+    line-height: 30px;
+    padding: 4px 6px;
+    margin-bottom: 13px;
 }
