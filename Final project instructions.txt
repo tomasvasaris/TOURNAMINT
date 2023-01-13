@@ -51,7 +51,7 @@ GIT requirements:
 • Branchų vardai turi atitikti tuo metu sprendžiamą problemą arba implementuojamą feature
 
 Web API requirements:
-  Unit test coverage (Visi servisai,actionai privalo būti patestuoti)
+  Unit test coverage (Visi servisai, actionai privalo būti patestuoti)
   Privalo būti panaudotas MOQ ir InMemory DB
   Dependancy Invertion Principle (Viskas turi naudoti interface'us)
   Turi būti loggingas

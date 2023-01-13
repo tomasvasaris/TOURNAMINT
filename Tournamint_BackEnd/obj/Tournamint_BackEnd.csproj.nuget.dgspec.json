@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tomas\\Desktop\\C#\\CA-Studies-FINAL\\TOURNAMINT\\TOURNAMINT.csproj": {}
+    "C:\\Users\\tomas\\Desktop\\C#\\CA-Studies-FINAL\\TOURNAMINT\\Tournamint_BackEnd\\Tournamint_BackEnd.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tomas\\Desktop\\C#\\CA-Studies-FINAL\\TOURNAMINT\\TOURNAMINT.csproj": {
+    "C:\\Users\\tomas\\Desktop\\C#\\CA-Studies-FINAL\\TOURNAMINT\\Tournamint_BackEnd\\Tournamint_BackEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tomas\\Desktop\\C#\\CA-Studies-FINAL\\TOURNAMINT\\TOURNAMINT.csproj",
-        "projectName": "TOURNAMINT",
-        "projectPath": "C:\\Users\\tomas\\Desktop\\C#\\CA-Studies-FINAL\\TOURNAMINT\\TOURNAMINT.csproj",
+        "projectUniqueName": "C:\\Users\\tomas\\Desktop\\C#\\CA-Studies-FINAL\\TOURNAMINT\\Tournamint_BackEnd\\Tournamint_BackEnd.csproj",
+        "projectName": "Tournamint_BackEnd",
+        "projectPath": "C:\\Users\\tomas\\Desktop\\C#\\CA-Studies-FINAL\\TOURNAMINT\\Tournamint_BackEnd\\Tournamint_BackEnd.csproj",
         "packagesPath": "C:\\Users\\tomas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tomas\\Desktop\\C#\\CA-Studies-FINAL\\TOURNAMINT\\obj\\",
+        "outputPath": "C:\\Users\\tomas\\Desktop\\C#\\CA-Studies-FINAL\\TOURNAMINT\\Tournamint_BackEnd\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tomas\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +39,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.2.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -51,6 +57,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
