@@ -33,7 +33,7 @@ FROTNEND requirements:
 • HTML
 • HTML Forms
 • CSS
-• CSS Styling fle•bo•
+• CSS Styling flexbox
   JS Async/Promise
   JS Fetch
 • JS Dom manipulation
@@ -51,29 +51,29 @@ GIT requirements:
 • Branchų vardai turi atitikti tuo metu sprendžiamą problemą arba implementuojamą feature
 
 Web API requirements:
-Unit test coverage (Visi servisai,actionai privalo būti patestuoti)
-Privalo būti panaudotas MOQ ir InMemory DB
-Dependancy Invertion Principle(Viskas turi naudoti interface'us)
-Turi būti loggingas
-DRY (don't repeat yourself)
-Swagger dokumentacija
-Autentikacija+Autorizacija
-Rolės kaip rekomendacija, bet nebūtinybė
-Broken Access Control (Kad useris negaletu prisijungti ne savo vardu, claim missuse)
-Sistema privalo palaikyti asinchroninę komunikaciją
-Privalot stengtis naudoti generic sprendimus ten kur matot potencialą sudėlioti labiau generic kodą
-Rekomenduotina panaudoti bent vieną PATCH endpointą
-Tvarkingi controlleriai (Jei controlleris vadinas User tai turėtų dirbti tik su User (SINGLE RESPONSIBILITY PRINCIPLE)
-ModelState, Attribute validation
-Turi būti nurodoma parametrų kilmė (Pvz: [FromBody])
+  Unit test coverage (Visi servisai,actionai privalo būti patestuoti)
+  Privalo būti panaudotas MOQ ir InMemory DB
+  Dependancy Invertion Principle (Viskas turi naudoti interface'us)
+  Turi būti loggingas
+  DRY (don't repeat yourself)
+  Swagger dokumentacija
+  Autentikacija+Autorizacija
+  Rolės kaip rekomendacija, bet nebūtinybė
+  Broken Access Control (Kad useris negaletu prisijungti ne savo vardu, claim missuse)
+  Sistema privalo palaikyti asinchroninę komunikaciją
+  Privalot stengtis naudoti generic sprendimus ten kur matot potencialą sudėlioti labiau generic kodą
+  Rekomenduotina panaudoti bent vieną PATCH endpointą
+  Tvarkingi controlleriai (Jei controlleris vadinas User tai turėtų dirbti tik su User (SINGLE RESPONSIBILITY PRINCIPLE)
+  ModelState, Attribute validation
+  Turi būti nurodoma parametrų kilmė (Pvz: [FromBody])
 
 DB requirements:
-Unit test coverage (Visi servisai,actionai privalo būti patestuoti)
-Privalo būti panaudotas MOQ ir InMemory DB
-Dependancy Invertion Principle(Viskas turi naudoti interface'us)
-Turi būti loggingas
-DRY (don't repeat yourself)
-Swagger dokumentacija
-Autentikacija+Autorizacija
-Rolės kaip rekomendacija, bet nebūtinybė
-Broken Access Control (Kad useris negaletu prisijungti ne savo vardu, claim missuse)
+  Unit test coverage (Visi servisai,actionai privalo būti patestuoti)
+  Privalo būti panaudotas MOQ ir InMemory DB
+  Dependancy Invertion Principle(Viskas turi naudoti interface'us)
+  Turi būti loggingas
+  DRY (don't repeat yourself)
+  Swagger dokumentacija
+  Autentikacija+Autorizacija
+  Rolės kaip rekomendacija, bet nebūtinybė
+  Broken Access Control (Kad useris negaletu prisijungti ne savo vardu, claim missuse)

@@ -120,6 +120,8 @@ function TournamentCreate() {
     let tourName = document.getElementById("newName").value;
     let tourType = document.getElementById("newType").value;
     let tourDate = document.getElementById("newDate").value;
+
+    if (tourType === "robin") {tourType = "Round Robin";}
     
     let tourParticipants = [];
     tourParticipants.push(JSON.parse(sessionStorage.getItem('activeUser')));
@@ -129,7 +131,7 @@ function TournamentCreate() {
 
     } else {
 
-        let tourney = [tourName, tourType, tourDate, tourParticipants];
+        let tourney = {Name: tourName, Type: tourType, Date: tourDate, Players: tourParticipants};
         let tourneyList = [];
 
         if (JSON.parse(localStorage.getItem(0)) !== null) {

@@ -5,6 +5,10 @@ submit.addEventListener('click', () => {
     let user = {firstName: firstname, lastName: lastname, eMail: email};
     let lenght = localStorage.length;
 
+    if (localStorage.getItem(0) !== null) {
+        lenght--;
+    }
+
     if(firstname === "" || lastname === "" || email === "") {
         alert('All fields need to be filled in!');
 
@@ -15,7 +19,7 @@ submit.addEventListener('click', () => {
         while (exists === false && count !== lenght){
             count++;
             let userx = JSON.parse(localStorage.getItem(count));
-            
+
             if(userx.firstName === firstname && userx.lastName === lastname) {
                 exists = true;
             }
