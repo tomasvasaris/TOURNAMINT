@@ -21,19 +21,14 @@ namespace Tournamint_BackEnd.Controllers
         /// <summary>
         /// Receives all game matches and filters them based on tournament id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="req"></param>
         /// <returns></returns>
-        [HttpGet("matches/{id}")]
+        [HttpGet("matches/{req}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<GetMatchResult>))]
         [Produces(MediaTypeNames.Application.Json)]
-        public List<Match> GetMatchesByTournamentID(int id)
+        public IActionResult GetMatchesByTournamentID([FromQuery]FilterMatchRequest req)
         {
-            List<Match> matches = new List<Match> { };
-            // [IMPORTANT] the part where it gets ALL matches so that it can filter them
-
-            List<Match> filteredMatches = (List<Match>)(from m in matches
-                                                        where m.TournamentId == id
-                                                        select m);
-            return filteredMatches;
+            return Ok();
         }
 
         /// <summary>
@@ -66,11 +61,12 @@ namespace Tournamint_BackEnd.Controllers
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
         public IActionResult Post([FromBody]PostMatchRequest req)
         {
-            return Created("", null);
+            return Created("PostMatch", new {Id = 0});
         }
 
         /// <summary>
@@ -79,6 +75,7 @@ namespace Tournamint_BackEnd.Controllers
         /// <returns></returns>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
         public IActionResult Put(PutMatchRequest req)
@@ -92,6 +89,7 @@ namespace Tournamint_BackEnd.Controllers
         /// <returns></returns>
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Produces(MediaTypeNames.Application.Json)]
         public IActionResult Delete(int id)
         {

@@ -4,11 +4,11 @@
         <name>Tournamint_BackEnd</name>
     </assembly>
     <members>
-        <member name="M:Tournamint_BackEnd.Controllers.MatchController.GetMatchesByTournamentID(System.Int32)">
+        <member name="M:Tournamint_BackEnd.Controllers.MatchController.GetMatchesByTournamentID(Tournamint_BackEnd.Models.DTO.FilterMatchRequest)">
             <summary>
             Receives all game matches and filters them based on tournament id
             </summary>
-            <param name="id"></param>
+            <param name="req"></param>
             <returns></returns>
         </member>
         <member name="M:Tournamint_BackEnd.Controllers.MatchController.Get">
@@ -40,6 +40,126 @@
             Delete a game match from database
             </summary>
             <returns></returns>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.FilterMatchRequest.TournamentId">
+            <summary>
+            ID number of the tournament where the matches were played
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.GetMatchResult.MatchId">
+            <summary>
+            ID number of the game match
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.GetMatchResult.TournamentId">
+            <summary>
+            ID number of the tournament where the match was played
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.GetMatchResult.PlayerOne">
+            <summary>
+            Name_Surname string of Player 01
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.GetMatchResult.PlayerTwo">
+            <summary>
+            Name_Surname string of Player 02
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.GetMatchResult.PlayerOneScore">
+            <summary>
+            Match Score of Player 01
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.GetMatchResult.PlayerTwoScore">
+            <summary>
+            Match Score of Player 02
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.PostMatchRequest.MatchId">
+            <summary>
+            ID number of the game match
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.PostMatchRequest.TournamentId">
+            <summary>
+            ID number of the tournament where the match was played
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.PostMatchRequest.PlayerOne">
+            <summary>
+            Name_Surname string of Player 01
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.PostMatchRequest.PlayerTwo">
+            <summary>
+            Name_Surname string of Player 02
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.PostMatchRequest.PlayerOneScore">
+            <summary>
+            Match Score of Player 01
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.PostMatchRequest.PlayerTwoScore">
+            <summary>
+            Match Score of Player 02
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.PutMatchRequest.TournamentId">
+            <summary>
+            ID number of the tournament where the match was played
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.PutMatchRequest.PlayerOne">
+            <summary>
+            Name_Surname string of Player 01
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.PutMatchRequest.PlayerTwo">
+            <summary>
+            Name_Surname string of Player 02
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.PutMatchRequest.PlayerOneScore">
+            <summary>
+            Match Score of Player 01
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.PutMatchRequest.PlayerTwoScore">
+            <summary>
+            Match Score of Player 02
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.Match.MatchId">
+            <summary>
+            ID number of the game match
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.Match.TournamentId">
+            <summary>
+            ID number of the tournament where the match was played
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.Match.PlayerOne">
+            <summary>
+            Name_Surname string of Player 01
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.Match.PlayerTwo">
+            <summary>
+            Name_Surname string of Player 02
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.Match.PlayerOneScore">
+            <summary>
+            Match Score of Player 01
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.Match.PlayerTwoScore">
+            <summary>
+            Match Score of Player 02
+            </summary>
         </member>
     </members>
 </doc>

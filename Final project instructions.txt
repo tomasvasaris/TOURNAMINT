@@ -56,7 +56,7 @@ Web API requirements:
 • Dependancy Invertion Principle (Viskas turi naudoti interface'us)
   Turi būti loggingas
 • DRY (don't repeat yourself)
-  Swagger dokumentacija
+• Swagger dokumentacija
   Autentikacija+Autorizacija
 • Rolės kaip rekomendacija, bet nebūtinybė
   Broken Access Control (Kad useris negaletu prisijungti ne savo vardu, claim missuse)
@@ -65,7 +65,7 @@ Web API requirements:
   Rekomenduotina panaudoti bent vieną PATCH endpointą
 • Tvarkingi controlleriai (Jei controlleris vadinas User tai turėtų dirbti tik su User (SINGLE RESPONSIBILITY PRINCIPLE)
   ModelState, Attribute validation
-  Turi būti nurodoma parametrų kilmė (Pvz: [FromBody])
+• Turi būti nurodoma parametrų kilmė (Pvz: [FromBody])
 
 DB requirements:
   Unit test coverage (Visi servisai,actionai privalo būti patestuoti)
