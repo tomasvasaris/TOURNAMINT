@@ -40,7 +40,7 @@ namespace Tournamint_BackEnd.Controllers
         /// Receives a list of game matches from database
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("matches/")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<GetMatchResult>))]
         [Produces(MediaTypeNames.Application.Json)]
         public IActionResult Get()

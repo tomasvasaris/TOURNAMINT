@@ -1,6 +1,6 @@
 ﻿namespace Tournamint_BackEnd.Models.DTO
 {
-    public class GetMatchResult
+    public class PostMatchRequest
     {
         /// <summary>
         /// ID number of the game match

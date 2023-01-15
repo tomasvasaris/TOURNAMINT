@@ -1,11 +1,7 @@
 ﻿namespace Tournamint_BackEnd.Models.DTO
 {
-    public class GetMatchResult
+    public class PutMatchRequest
     {
-        /// <summary>
-        /// ID number of the game match
-        /// </summary>
-        public int MatchId { get; set; }
         /// <summary>
         /// ID number of the tournament where the match was played
         /// </summary>
