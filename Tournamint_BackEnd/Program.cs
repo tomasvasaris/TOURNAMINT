@@ -1,4 +1,6 @@
 using System.Reflection;
+using Microsoft.EntityFrameworkCore;
+using Tournamint_BackEnd.Database;
 using Tournamint_BackEnd.Services;
 
 namespace Tournamint_BackEnd
@@ -10,6 +12,11 @@ namespace Tournamint_BackEnd
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContext<MatchContext>(options =>
+            {
+                options.UseSqlite(builder.Configuration.GetConnectionString("MatchConnectionString"));
+            });
+
             builder.Services.AddTransient<IOperationTransient, GuidService>();
             builder.Services.AddScoped<IOperationScoped, GuidService>();
             builder.Services.AddSingleton<IOperationSingleton, GuidService>();

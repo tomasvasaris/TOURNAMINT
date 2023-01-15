@@ -131,35 +131,5 @@
             Match Score of Player 02
             </summary>
         </member>
-        <member name="P:Tournamint_BackEnd.Models.Match.MatchId">
-            <summary>
-            ID number of the game match
-            </summary>
-        </member>
-        <member name="P:Tournamint_BackEnd.Models.Match.TournamentId">
-            <summary>
-            ID number of the tournament where the match was played
-            </summary>
-        </member>
-        <member name="P:Tournamint_BackEnd.Models.Match.PlayerOne">
-            <summary>
-            Name_Surname string of Player 01
-            </summary>
-        </member>
-        <member name="P:Tournamint_BackEnd.Models.Match.PlayerTwo">
-            <summary>
-            Name_Surname string of Player 02
-            </summary>
-        </member>
-        <member name="P:Tournamint_BackEnd.Models.Match.PlayerOneScore">
-            <summary>
-            Match Score of Player 01
-            </summary>
-        </member>
-        <member name="P:Tournamint_BackEnd.Models.Match.PlayerTwoScore">
-            <summary>
-            Match Score of Player 02
-            </summary>
-        </member>
     </members>
 </doc>
