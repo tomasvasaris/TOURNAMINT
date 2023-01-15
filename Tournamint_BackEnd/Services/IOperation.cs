@@ -1,8 +1,13 @@
-﻿namespace CA_API_01.Services
+﻿namespace Tournamint_BackEnd.Services
 {
     public interface IOperation
     {
         string GetOperationId();
 
     }
+
+    public interface IOperationTransient : IOperation { }
+    public interface IOperationScoped : IOperation { }
+    public interface IOperationSingleton : IOperation { }
+
 }
