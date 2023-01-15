@@ -2,6 +2,8 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Tournamint_BackEnd.Database;
 using Tournamint_BackEnd.Services;
+using Tournamint_BackEnd.Repositories;
+using Tournamint_BackEnd.Models;
 
 namespace Tournamint_BackEnd
 {
@@ -17,9 +19,9 @@ namespace Tournamint_BackEnd
                 options.UseSqlite(builder.Configuration.GetConnectionString("MatchConnectionString"));
             });
 
-            builder.Services.AddTransient<IOperationTransient, GuidService>();
-            builder.Services.AddScoped<IOperationScoped, GuidService>();
-            builder.Services.AddSingleton<IOperationSingleton, GuidService>();
+            builder.Services.AddTransient<IRepository<Match>, MatchRepository>();
+            builder.Services.AddTransient<IMatchAdapter, MatchAdapter>();
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Tournamint_BackEnd.Models;
 using Tournamint_BackEnd.Models.DTO;
+using Tournamint_BackEnd.Repositories;
+using Tournamint_BackEnd.Services;
 
 namespace Tournamint_BackEnd.Controllers
 {
@@ -12,23 +14,34 @@ namespace Tournamint_BackEnd.Controllers
     public class MatchController : ControllerBase
     {
         private readonly ILogger<MatchController> _logger;
+        private readonly IRepository<Match> _repository;
+        private readonly IMatchAdapter _adapter;
 
-        public MatchController(ILogger<MatchController> logger)
+        public MatchController(ILogger<MatchController> logger, 
+            IRepository<Match> repository,
+            IMatchAdapter adapter)
         {
             _logger = logger;
+            _repository = repository;
+            _adapter = adapter;
         }
+
 
         /// <summary>
         /// Receives all game matches and filters them based on tournament id
         /// </summary>
-        /// <param name="req"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("matches/{req}")]
+        [HttpGet("matches/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<GetMatchResult>))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [Produces(MediaTypeNames.Application.Json)]
-        public IActionResult GetMatchesByTournamentID([FromQuery]FilterMatchRequest req)
+        public IActionResult GetMatchesByTournamentID(int id)
         {
-            return Ok();
+            var entities = _repository.All();
+            var model = entities.Select(x => _adapter.Bind(x).TournamentId == id);
+
+            return Ok(model);
         }
 
         /// <summary>
@@ -37,10 +50,17 @@ namespace Tournamint_BackEnd.Controllers
         /// <returns></returns>
         [HttpGet("matches/")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<GetMatchResult>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Produces(MediaTypeNames.Application.Json)]
         public IActionResult Get()
         {
-            return Ok();
+            var entities = _repository.All();
+            var model = entities.Select(x => _adapter.Bind(x));
+
+            return Ok(model);
         }
 
         /// <summary>
@@ -52,7 +72,13 @@ namespace Tournamint_BackEnd.Controllers
         [Produces(MediaTypeNames.Application.Json)]
         public IActionResult Get(int id)
         {
-            return Ok();
+            if (!_repository.Exists(id))
+                return NotFound();
+
+            var entity = _repository.Get(id);
+            var model = _adapter.Bind(entity);
+
+            return Ok(model);
         }
 
         /// <summary>
@@ -62,11 +88,20 @@ namespace Tournamint_BackEnd.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
         public IActionResult Post([FromBody]PostMatchRequest req)
         {
-            return Created("PostMatch", new {Id = 0});
+            if (!ModelState.IsValid)
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            var entity = _adapter.Bind(req);
+            var id = _repository.Create(entity);
+
+            return Created("PostMatch", new { Id = id });
         }
 
         /// <summary>
@@ -74,12 +109,28 @@ namespace Tournamint_BackEnd.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
         public IActionResult Put(PutMatchRequest req)
         {
+            if (!ModelState.IsValid)
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            if (!_repository.Exists(req.MatchId))
+            {
+                _logger.LogInformation("Car with id {id} not found", req.MatchId);
+                return NotFound();
+            }
+
+            var entity = _adapter.Bind(req);
+            _repository.Update(entity);
+
             return NoContent();
         }
 
@@ -93,6 +144,14 @@ namespace Tournamint_BackEnd.Controllers
         [Produces(MediaTypeNames.Application.Json)]
         public IActionResult Delete(int id)
         {
+            if (!_repository.Exists(id))
+            {
+                _logger.LogInformation("Car with id {id} not found", id);
+                return NotFound();
+            }
+            var entity = _repository.Get(id);
+            _repository.Remove(entity);
+
             return NoContent();
         }
     }
