@@ -25,3 +25,5 @@ C:\Users\tomas\Desktop\C#\CA-Studies-FINAL\TOURNAMINT\Tournamint_BackEnd\obj\Deb
 C:\Users\tomas\Desktop\C#\CA-Studies-FINAL\TOURNAMINT\Tournamint_BackEnd\obj\Debug\net6.0\Tournamint_BackEnd.pdb
 C:\Users\tomas\Desktop\C#\CA-Studies-FINAL\TOURNAMINT\Tournamint_BackEnd\obj\Debug\net6.0\Tournamint_BackEnd.genruntimeconfig.cache
 C:\Users\tomas\Desktop\C#\CA-Studies-FINAL\TOURNAMINT\Tournamint_BackEnd\obj\Debug\net6.0\ref\Tournamint_BackEnd.dll
+C:\Users\tomas\Desktop\C#\CA-Studies-FINAL\TOURNAMINT\Tournamint_BackEnd\bin\Debug\net6.0\Tournamint_BackEnd.xml
+C:\Users\tomas\Desktop\C#\CA-Studies-FINAL\TOURNAMINT\Tournamint_BackEnd\obj\Debug\net6.0\Tournamint_BackEnd.xml
