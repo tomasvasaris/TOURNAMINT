@@ -26,6 +26,10 @@ addnew.addEventListener('click', () => {
 });
 
 
+scores.addEventListener('click', (e) => {
+    TournamentAddScores();
+})
+
 create.addEventListener('click', () => {
     TournamentCreate();
 });
@@ -113,13 +117,14 @@ function TournamentCreate() {
     if (tourType === "robin") {tourType = "Round Robin";}
     
     let tourParticipants = [];
+    let matches = [];
     tourParticipants.push(user);
 
     if (tourName === "" || tourType === "" || tourDate === "") {
         alert('All fields need to be filled in!');
 
     } else {
-        let tourney = {Name: tourName, Type: tourType, Date: tourDate, Players: tourParticipants, Matches: []};
+        let tourney = {Name: tourName, Type: tourType, Date: tourDate, Players: tourParticipants, Matches: matches};
         let tourneyList = [];
 
         if (JSON.parse(localStorage.getItem(0)) !== null) {
@@ -158,8 +163,6 @@ function SeeTable(itemno) {
     tournitem2.className = "tournMatches";
     tournitem3.className = "tournEnterScore";
     
-    GetMatches();
-
     // 01 Tournament name
     tournitem1.innerHTML = selectedTourn.Name;
 
@@ -173,6 +176,7 @@ function SeeTable(itemno) {
             if (player1.firstName !== player2.firstName || player1.lastName !== player2.lastName) {
                 let score = "0/0";
 
+                // [FINAL UPDATE GOES HERE]
 
                 tournTable = tournTable + player1.firstName + " " + player1.lastName;
                 tournTable = tournTable + " " + score + " " ;
@@ -194,42 +198,42 @@ function SeeTable(itemno) {
     ChangeTabs(2);
 }
 
-function GetMatches() {
-    let url = 'https://localhost:7065/api/Match/matches/' + selectedTourNo
-    fetch(url => {
-        if (resizeBy.ok) {
-            matches = data;
-            comsole.log(data);
-        }
-    })
-    .catch(error => console.log('Error retrieving data D;'));
-}
-
 
 // Add Scores to Selected Tournament
 
 function TournamentAddScores() {
-    const match = {
-        MatchId: -1,
-        TournamentId: -1,
-        PlayerOne: "TestPlayerOne",
-        PlayerTwo: "TestPlayerTwo",
-        PlayerOneScore: 0,
-        PlayerTwoScore: 1
-        };
-    // insert matchification [IMPORTNAT]
+    let winnerFirstName = document.getElementById("WinnerFirstName").value;
+    let winnerLastName = document.getElementById("WinnerLastName").value;
+    let loserFirstName = document.getElementById("LoserFirstName").value;
+    let loserLastName = document.getElementById("LoserLastName").value;
 
-    fetch('https://localhost:7065/api/Match/matches/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(match)
-    }).then(res => {
-        return res.json()
-    })
-    .then(data => console.log(data))
-    .catch(error => console.log('Error posting data D;'))
+    if (winnerFirstName === "" || winnerLastName === "" || loserFirstName === "" || loserLastName === "") {
+        alert('All fields need to be filled in!');
+
+    } else {
+        let allTourneys = [];
+        allTourneys = JSON.parse(localStorage.getItem(0));
+
+        let match = {WinnerFirstName: winnerFirstName, 
+            WinnerLastName: winnerLastName, 
+            LoserFirstName: loserFirstName, 
+            LoserLastName: loserLastName};
+            
+        console.log(allTourneys);
+        console.log(allTourneys[selectedTourNo]);
+        console.log(allTourneys[selectedTourNo].Matches);
+        console.log(match);
+
+        allTourneys[selectedTourNo].Matches.push(match);
+        localStorage.setItem(0, JSON.stringify(allTourneys));
+    
+        document.getElementById("WinnerFirstName").value = "";
+        document.getElementById("WinnerLastName").value = "";
+        document.getElementById("LoserFirstName").value = "";
+        document.getElementById("LoserLastName").value = "";
+        
+        SeeTable(selectedTourNo);       
+    }    
 }
 
 
