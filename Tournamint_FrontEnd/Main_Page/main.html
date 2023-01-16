@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="CA Final Work" />
+    <meta name="keywords" content="CA, CodeAcademy, Tournamint" />
+    <meta name="author" content="Tomas Bingelis" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournamint</title>
+
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body onload="mainLoad()">
+
+    <!-- Application Headline -->
+    <div class="headline">
+        <h1>TOURNAMINT<img src="../mint.png" atl="logo" width="20"/></h1>
+        <h2 id="hh"></h2>
+    </div>
+    
+    <!-- Main Information Field (List of Active Tournaments) -->
+    <div id="FieldMain" style="display: block;">
+    </div>
+
+    <!-- Individual Tournament Information/Statistics Field -->
+    <div id="FieldStats" style="display: none;">
+        <div id="FieldStatsTable" style="display: block;"></div>
+        <div id="FieldStatsInput" style="display: block;">
+            
+        <label for="PlayerOneName">Player One Name: </label>
+        <input type="text" id="PlayerOneName" minlength="1" maxlength="101"/> <br/>
+        
+        <label for="PlayerOneScore">Player One Score: </label>
+        <input type="text" id="PlayerOneScore" minlength="1" maxlength="10"/> <br/>
+        
+        <label for="PlayerTwoScore">Player Two Score: </label>
+        <input type="text" id="PlayerTwoScore" minlength="1" maxlength="10"/> <br/>
+        
+        <label for="PlayerTwoNamet">Player Two Name: </label>
+        <input type="text" id="PlayerTwoNamet" minlength="1" maxlength="101"/> <br/>
+
+        </div>
+    </div>
+
+    <!-- Create New Tourney -->
+    <div class="info" id="FieldCreate" style="display: none;">
+        <label for="name">Name: </label>
+        <input type="text" id="newName" minlength="1" maxlength="50"/> <br/>
+
+        <label for="type">Type: </label>
+        <select name="type" id="newType">
+          <option value="robin" selected>Round Robin</option>
+          <!-- <option value="single">Single-Elimination</option>  // FUTURE FEATURE -->
+          <!-- <option value="double">Double-Elimination</option>  // FUTURE FEATURE -->
+        </select> <br/>
+
+        <label for="date">Deadline: </label>
+        <input type="datetime" id="newDate" min="2000-01-01" max="3000-01-01"/> <br/>
+    </div>
+
+
+    <!-- Navigation Field -->
+    <div class="presser"> <br/>
+        <div id="NavMain" style="display: block;">
+            <button id="addnew" type="button">Create</button>
+            <button id="logout" type="button">Logout</button>
+        </div>
+
+        <div id="NavCreate" style="display: none;">
+            <button id="create" type="button">Create</button>
+            <button id="gobck1" type="button">Go Back</button>
+        </div>
+
+        <div id="NavStats" style="display: none;">
+            <button id="scores" type="button">Add Score</button>
+            <button id="change" type="button"> </button>
+            <button id="gobck2" type="button">Go Back</button>
+        </div>
+    </div>
+    
+    <script src="m_script.js"></script>
+</body>
+</html>

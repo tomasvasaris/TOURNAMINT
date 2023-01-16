@@ -1,0 +1,94 @@
+body {
+    font-family: sans-serif;
+    background-color: #ffffff;
+    border: 5px solid #CBEDD5;
+    border-radius: 15px 15px 15px 15px;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2%;
+    text-align: center;
+    width: 450px;
+}
+
+div.headline {
+    color: grey;
+    position: sticky;
+    left: 50%;
+    margin-bottom: 40px;
+}
+
+div.tournName {
+    color: #439A97;
+    margin: 0px;
+    font-size: 20px;
+    margin: 30px;
+}
+
+h1 {
+    color: #439A97;
+    margin: 20px;
+}
+
+h2 {
+    color: #62B6B7;
+    margin: 10px;
+}
+
+button {
+    background-color: #97DECE;
+    border: none;
+    color: white;
+    padding: 7px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 100px;
+}
+
+button.openit {
+    background-color: #CBEDD5;
+    border: none;
+    color: hsl(0, 0%, 100%);
+    text-align: center;
+    text-decoration: none;
+    float: right;
+    width: 60px;
+}
+
+div.info {
+    font-size: 17px;
+}
+
+div.presser {
+    margin: 15px;
+}
+
+label {
+    position: fixed;
+    left: 15%;
+}
+
+input {
+    position: fixed;
+    right: 15%;
+}
+
+select {
+    position: fixed;
+    right: 15%;
+    width: 177px;
+}
+
+span {
+    margin: 15px;
+}
+
+span.nameSpan {
+    height: 30px;
+    line-height: 30px;
+    padding: 4px 6px;
+    margin-bottom: 13px;
+}
