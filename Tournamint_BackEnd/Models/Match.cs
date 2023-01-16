@@ -2,7 +2,7 @@
 {
     public class Match
     {
-        public int MatchId { get; set; } //Id
+        public int MatchId { get; set; }
         public int TournamentId { get; set; }
         public string? PlayerOne { get; set; }
         public string? PlayerTwo { get; set; }
