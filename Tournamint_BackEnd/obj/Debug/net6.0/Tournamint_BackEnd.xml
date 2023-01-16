@@ -71,11 +71,6 @@
             Match Score of Player 02
             </summary>
         </member>
-        <member name="P:Tournamint_BackEnd.Models.DTO.PostMatchRequest.MatchId">
-            <summary>
-            ID number of the game match
-            </summary>
-        </member>
         <member name="P:Tournamint_BackEnd.Models.DTO.PostMatchRequest.TournamentId">
             <summary>
             ID number of the tournament where the match was played

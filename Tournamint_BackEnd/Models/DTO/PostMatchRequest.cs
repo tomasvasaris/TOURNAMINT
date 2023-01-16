@@ -3,10 +3,6 @@
     public class PostMatchRequest
     {
         /// <summary>
-        /// ID number of the game match
-        /// </summary>
-        public int MatchId { get; set; }
-        /// <summary>
         /// ID number of the tournament where the match was played
         /// </summary>
         public int TournamentId { get; set; }

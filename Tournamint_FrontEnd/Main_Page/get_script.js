@@ -1,4 +1,4 @@
-const url = 'https://localhost:7065/api/Match/matches/';
+const url = 'https://localhost:7065/api/Match/';
 const options = {
     method: 'get'
 }

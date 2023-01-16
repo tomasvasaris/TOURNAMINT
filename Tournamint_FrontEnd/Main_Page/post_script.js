@@ -1,6 +1,6 @@
 function sendData() {
     const match = {
-        MatchId: 1,
+        MatchId: 10,
         TournamentId: 1,
         PlayerOne: "TestPlayerOne",
         PlayerTwo: "TestPlayerTwo",
@@ -12,7 +12,7 @@ function sendData() {
     console.log(match);
     let obj = {};
 
-    fetch('https://localhost:7065/api/Match/matches/', {
+    fetch('https://localhost:7065/api/Match/', {
         method: 'post',
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -30,10 +30,8 @@ function sendData() {
         }
         
         console.log(res);
-        var resBody = await res.json();
-        errorEle.textContent = resBody.message;
     })
-    .catch((err) => console.log(err));
+    .catch((error) => console.log(error));
 }
 
 scores.addEventListener('click', (e) => {

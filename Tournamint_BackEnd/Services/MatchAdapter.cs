@@ -20,12 +20,27 @@ namespace Tournamint_BackEnd.Services
 
         public Match Bind(PostMatchRequest match)
         {
-            throw new NotImplementedException();
+            return new Match
+            {
+                TournamentId = match.TournamentId,
+                PlayerOne = match.PlayerOne,
+                PlayerTwo = match.PlayerTwo,
+                PlayerOneScore = match.PlayerOneScore,
+                PlayerTwoScore = match.PlayerTwoScore,
+            };
         }
 
         public Match Bind(PutMatchRequest match)
         {
-            throw new NotImplementedException();
+            return new Match
+            {
+                MatchId = match.MatchId,
+                TournamentId = match.TournamentId,
+                PlayerOne = match.PlayerOne,
+                PlayerTwo = match.PlayerTwo,
+                PlayerOneScore = match.PlayerOneScore,
+                PlayerTwoScore = match.PlayerTwoScore,
+            };
         }
     }
 }
