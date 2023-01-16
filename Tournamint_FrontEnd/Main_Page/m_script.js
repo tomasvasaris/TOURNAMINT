@@ -142,12 +142,14 @@ function TournamentCreate() {
 
 // See Tournament Table and Statistics
 
+var matches = {}; // every match from the selected tournament
+
 function SeeTable(itemno) {
     let tourneyList = JSON.parse(localStorage.getItem(0));
     const selectedTourn = tourneyList[itemno];
     selectedTourNo = itemno;
 
-    const allTournItems = document.getElementById("FieldStats");
+    const allTournItems = document.getElementById("FieldStatsTable");
     allTournItems.innerHTML = "";
     tournCount=0;
     
@@ -159,9 +161,13 @@ function SeeTable(itemno) {
     tournitem1.className = "tournName";
     tournitem2.className = "tournMatches";
     tournitem3.className = "tournEnterScore";
+    
+    GetMatches();
 
+    // 01 Tournament name
     tournitem1.innerHTML = selectedTourn.Name;
 
+    // 02 Tournament table
     let tournTable = "";
     selectedTourn.Players.forEach(player1 => {
         selectedTourn.Players.forEach(player2 => {
@@ -181,9 +187,10 @@ function SeeTable(itemno) {
     });
     tournitem2.innerHTML = tournTable
 
-    tournitem0.appendChild(tournitem1);
-    tournitem0.appendChild(tournitem2);
-    tournitem0.appendChild(tournitem3);
+    // Finish up
+    tournitem0.appendChild(tournitem1)
+        .appendChild(tournitem2)
+        .appendChild(tournitem3);
 
     allTournItems.appendChild(tournitem0);
 
@@ -191,11 +198,42 @@ function SeeTable(itemno) {
     ChangeTabs(2);
 }
 
+function GetMatches() {
+    let url = 'https://localhost:7065/api/Match/matches/' + selectedTourNo
+    fetch(url => {
+        if (resizeBy.ok) {
+            matches = data;
+            comsole.log(data);
+        }
+    })
+    .catch(error => console.log('Error retrieving data D;'));
+}
+
 
 // Add Scores to Selected Tournament
 
 function TournamentAddScores() {
+    const match = {
+        MatchId: -1,
+        TournamentId: -1,
+        PlayerOne: "TestPlayerOne",
+        PlayerTwo: "TestPlayerTwo",
+        PlayerOneScore: 0,
+        PlayerTwoScore: 1
+        };
+    // insert matchification [IMPORTNAT]
 
+    fetch('https://localhost:7065/api/Match/matches/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(match)
+    }).then(res => {
+        return res.json()
+    })
+    .then(data => console.log(data))
+    .catch(error => console.log('Error posting data D;'))
 }
 
 

@@ -4,7 +4,7 @@
         <name>Tournamint_BackEnd</name>
     </assembly>
     <members>
-        <member name="M:Tournamint_BackEnd.Controllers.MatchController.GetMatchesByTournamentID(Tournamint_BackEnd.Models.DTO.FilterMatchRequest)">
+        <member name="M:Tournamint_BackEnd.Controllers.MatchController.GetMatchesByTournamentID(System.Int32)">
             <summary>
             Receives all game matches and filters them based on tournament id
             </summary>
@@ -40,11 +40,6 @@
             Delete a game match from database
             </summary>
             <returns></returns>
-        </member>
-        <member name="P:Tournamint_BackEnd.Models.DTO.FilterMatchRequest.TournamentId">
-            <summary>
-            ID number of the tournament where the matches were played
-            </summary>
         </member>
         <member name="P:Tournamint_BackEnd.Models.DTO.GetMatchResult.MatchId">
             <summary>
@@ -104,6 +99,11 @@
         <member name="P:Tournamint_BackEnd.Models.DTO.PostMatchRequest.PlayerTwoScore">
             <summary>
             Match Score of Player 02
+            </summary>
+        </member>
+        <member name="P:Tournamint_BackEnd.Models.DTO.PutMatchRequest.MatchId">
+            <summary>
+            ID number of the game match
             </summary>
         </member>
         <member name="P:Tournamint_BackEnd.Models.DTO.PutMatchRequest.TournamentId">
