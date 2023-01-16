@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Tournamint_BackEnd.Database.InitialData;
 using Tournamint_BackEnd.Models;
 
 namespace Tournamint_BackEnd.Database
@@ -19,8 +20,8 @@ namespace Tournamint_BackEnd.Database
             modelBuilder.Entity<Match>().Property(x => x.PlayerTwo).IsRequired();
             modelBuilder.Entity<Match>().Property(x => x.PlayerOneScore).IsRequired();
             modelBuilder.Entity<Match>().Property(x => x.PlayerTwoScore).IsRequired();
-        }
 
-        //modelBuilder.Entity<Car>().HasData(CarInitialData.DataSeed);
+            modelBuilder.Entity<Match>().HasData(MatchInitialData.DataSeed);
+        }
     }
 }

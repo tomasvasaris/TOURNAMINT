@@ -21,7 +21,6 @@ namespace Tournamint_BackEnd.Repositories
 
         public Match Get(int id)
         {
-            //turn _context.matches.Find(id); could return null
             return _context.matches.First(x => x.MatchId == id);
         }
 

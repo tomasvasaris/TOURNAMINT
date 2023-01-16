@@ -189,8 +189,8 @@ function SeeTable(itemno) {
 
     // Finish up
     tournitem0.appendChild(tournitem1)
-        .appendChild(tournitem2)
-        .appendChild(tournitem3);
+    tournitem0.appendChild(tournitem2)
+    tournitem0.appendChild(tournitem3);
 
     allTournItems.appendChild(tournitem0);
 

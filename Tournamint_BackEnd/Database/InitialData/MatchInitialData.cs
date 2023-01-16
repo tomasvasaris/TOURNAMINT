@@ -6,12 +6,28 @@ namespace Tournamint_BackEnd.Database.InitialData
     {
         public static readonly Match[] DataSeed = new Match[] {
         new Match {
-            MatchId = -1,
+            MatchId = 0,
             TournamentId = -1,
             PlayerOne = "TestPlayerOne",
             PlayerTwo = "TestPlayerTwo",
             PlayerOneScore = 0,
             PlayerTwoScore = 1
+            },
+        new Match {
+            MatchId = 1,
+            TournamentId = -1,
+            PlayerOne = "TestPlayerOne",
+            PlayerTwo = "TestPlayerTwo",
+            PlayerOneScore = 1,
+            PlayerTwoScore = 1
+            },
+        new Match {
+            MatchId = 2,
+            TournamentId = -1,
+            PlayerOne = "TestPlayerOne",
+            PlayerTwo = "TestPlayerTwo",
+            PlayerOneScore = 10,
+            PlayerTwoScore = 13
             }
         };
     }
