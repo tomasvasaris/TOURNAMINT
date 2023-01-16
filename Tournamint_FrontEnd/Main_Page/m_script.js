@@ -30,10 +30,6 @@ create.addEventListener('click', () => {
     TournamentCreate();
 });
 
-scores.addEventListener('click', () => {
-    TournamentAddScores();
-});
-
 logout.addEventListener('click', () => {
     window.location.href = '../index.html'
 });

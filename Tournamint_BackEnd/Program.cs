@@ -35,6 +35,13 @@ namespace Tournamint_BackEnd
                 option.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
             });
 
+            builder.Services.AddCors(p => p.AddPolicy("corsformatches", builder =>
+            {
+                builder.WithOrigins("*")
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            }));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -44,13 +51,10 @@ namespace Tournamint_BackEnd
                 app.UseSwaggerUI();
             }
 
+            app.UseCors("corsformatches");
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
-
             app.Run();
         }
     }
