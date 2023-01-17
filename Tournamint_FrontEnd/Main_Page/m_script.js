@@ -174,9 +174,27 @@ function SeeTable(itemno) {
                 isParticipant = true;
             }
             if (player1.firstName !== player2.firstName || player1.lastName !== player2.lastName) {
-                let score = "0/0";
+                let p1score = '0';
+                let p2score = '0';
 
-                // [FINAL UPDATE GOES HERE]
+                selectedTourn.Matches.forEach(match => {
+                    if(player1.firstName === match.WinnerFirstName &&
+                        player1.lastName === match.WinnerLastName &&
+                        player2.firstName === match.LoserFirstName &&
+                        player2.lastName === match.LoserLastName) {
+                            p1score = 'W';
+                            p2score = 'L';
+                        };
+                    if(player1.firstName === match.LoserFirstName &&
+                        player1.lastName === match.LoserLastName &&
+                        player2.firstName === match.WinnerFirstName &&
+                        player2.lastName === match.WinnerLastName) {
+                            p1score = 'L';
+                            p2score = 'W';
+                        };
+                })
+
+                let score = p1score + '/' + p2score;
 
                 tournTable = tournTable + player1.firstName + " " + player1.lastName;
                 tournTable = tournTable + " " + score + " " ;
