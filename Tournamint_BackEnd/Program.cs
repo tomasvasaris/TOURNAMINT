@@ -34,7 +34,7 @@ namespace Tournamint_BackEnd
                 option.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
             });
 
-            
+            /*
             builder.Services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>
@@ -43,14 +43,14 @@ namespace Tournamint_BackEnd
                            .AllowAnyMethod()
                            .AllowAnyHeader();
                 });
-            });/*
+            });*/
 
             builder.Services.AddCors(p => p.AddPolicy("corsformatches", builder =>
             {
                 builder.WithOrigins("*")
                 .AllowAnyMethod()
                 .AllowAnyHeader();
-            }));*/
+            }));
 
             var app = builder.Build();
 
@@ -61,7 +61,7 @@ namespace Tournamint_BackEnd
                 app.UseSwaggerUI();
             }
 
-            app.UseCors(); //"corsformatches"
+            app.UseCors("corsformatches"); //"corsformatches"
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
