@@ -1,5 +1,7 @@
 using System.Reflection;
+using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Tournamint_BackEnd.Database;
 using Tournamint_BackEnd.Services;
 using Tournamint_BackEnd.Repositories;
@@ -19,11 +21,8 @@ namespace Tournamint_BackEnd
                 options.UseSqlite(builder.Configuration.GetConnectionString("MatchConnectionString"));
             });
 
-            builder.Services.AddTransient<IRepository<Match>, MatchRepository>();
-            builder.Services.AddTransient<IMatchAdapter, MatchAdapter>();
-
+            builder.Services.AddServices();
             builder.Services.AddHttpContextAccessor();
-
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -35,12 +34,23 @@ namespace Tournamint_BackEnd
                 option.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
             });
 
+            
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });/*
+
             builder.Services.AddCors(p => p.AddPolicy("corsformatches", builder =>
             {
                 builder.WithOrigins("*")
                 .AllowAnyMethod()
                 .AllowAnyHeader();
-            }));
+            }));*/
 
             var app = builder.Build();
 
@@ -51,7 +61,7 @@ namespace Tournamint_BackEnd
                 app.UseSwaggerUI();
             }
 
-            app.UseCors("corsformatches");
+            app.UseCors(); //"corsformatches"
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();

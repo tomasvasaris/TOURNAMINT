@@ -9,16 +9,16 @@ using Tournamint_BackEnd.Services;
 
 namespace Tournamint_BackEnd.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class MatchController : ControllerBase
     {
         private readonly ILogger<MatchController> _logger;
-        private readonly IRepository<Match> _repository;
+        private readonly IMatchRepository _repository;
         private readonly IMatchAdapter _adapter;
 
         public MatchController(ILogger<MatchController> logger, 
-            IRepository<Match> repository,
+            IMatchRepository repository,
             IMatchAdapter adapter)
         {
             _logger = logger;

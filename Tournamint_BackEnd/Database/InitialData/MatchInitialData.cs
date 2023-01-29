@@ -19,15 +19,15 @@ namespace Tournamint_BackEnd.Database.InitialData
             PlayerOne = "TestPlayerOne",
             PlayerTwo = "TestPlayerTwo",
             PlayerOneScore = 1,
-            PlayerTwoScore = 1
+            PlayerTwoScore = 0
             },
         new Match {
             MatchId = 3,
-            TournamentId = 2,
+            TournamentId = 1,
             PlayerOne = "TestPlayerOne",
             PlayerTwo = "TestPlayerTwo",
-            PlayerOneScore = 10,
-            PlayerTwoScore = 13
+            PlayerOneScore = 0,
+            PlayerTwoScore = 1
             }
         };
     }

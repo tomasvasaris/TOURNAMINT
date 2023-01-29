@@ -4,7 +4,7 @@ using Tournamint_BackEnd.Models;
 
 namespace Tournamint_BackEnd.Repositories
 {
-    public class MatchRepository : IRepository<Match>
+    public class MatchRepository : IMatchRepository
     {
         private readonly MatchContext _context;
 
