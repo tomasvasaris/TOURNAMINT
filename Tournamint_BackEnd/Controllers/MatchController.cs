@@ -6,12 +6,13 @@ using System.Net.Mime;
 using Tournamint_BackEnd.Services;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Tournamint_BackEnd.Controllers
 {
-    [ApiController]
     [Route("[controller]")]
-    [Authorize]
+    [ApiController]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class MatchController : ControllerBase
     {
         private readonly ILogger<MatchController> _logger;
@@ -29,6 +30,25 @@ namespace Tournamint_BackEnd.Controllers
 
         /// <summary>
         /// Get all matches from database
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("matches/")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<GetMatchResult>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Produces(MediaTypeNames.Application.Json)]
+        public IActionResult Get()
+        {
+            var entities = _repository.All();
+            var model = entities.Select(x => _adapter.Bind(x));
+
+            return Ok(model);
+        }
+
+        /// <summary>
+        /// Get all matches from database with provided id
         /// </summary>
         /// <returns></returns>
         [HttpGet("{id}")]

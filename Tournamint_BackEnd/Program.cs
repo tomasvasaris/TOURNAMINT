@@ -23,8 +23,7 @@ namespace Tournamint_BackEnd
                 options.UseSqlite(builder.Configuration.GetConnectionString("MatchConnectionString"));
             });
 
-            builder.Services.AddTransient<IRepository<Match>, MatchRepository>();
-            builder.Services.AddTransient<IMatchAdapter, MatchAdapter>();
+            builder.Services.AddServices();
 
             //builder.Services.ServicesExtensions();
             builder.Services.AddScoped<IUserService, UserService>();
