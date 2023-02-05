@@ -12,7 +12,6 @@ namespace Tournamint_BackEnd.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class MatchController : ControllerBase
     {
         private readonly ILogger<MatchController> _logger;

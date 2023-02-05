@@ -13,8 +13,6 @@ namespace Tournamint_BackEnd
             }
             services.AddTransient<IMatchRepository, MatchRepository>();
             services.AddTransient<IMatchAdapter, MatchAdapter>();
-            services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IUserMatchRepository, UserMatchRepository>();
 
             return services;
         }

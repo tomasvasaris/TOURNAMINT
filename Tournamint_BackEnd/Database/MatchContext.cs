@@ -9,8 +9,6 @@ namespace Tournamint_BackEnd.Database
         public MatchContext(DbContextOptions<MatchContext> options) : base(options) {}
 
         public DbSet<Match> Matches { get; set; }
-        public DbSet<LocalUser> Users { get; set; } 
-        public DbSet<MatchUser> MatchUser { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,8 +22,6 @@ namespace Tournamint_BackEnd.Database
             modelBuilder.Entity<Match>().Property(x => x.PlayerTwoResult).IsRequired();
 
             modelBuilder.Entity<Match>().HasData(MatchInitialData.DataSeed);
-            modelBuilder.Entity<LocalUser>().HasKey(x => x.Id);
-            modelBuilder.Entity<MatchUser>().HasKey(x => new { x.Id, x.LocalUserId });
         }
     }
 }
