@@ -2,33 +2,39 @@
 
 namespace Tournamint_BackEnd.Database.InitialData
 {
-    public class MatchInitialData
+    public static class MatchInitialData
     {
         public static readonly Match[] DataSeed = new Match[] {
         new Match {
-            MatchId = 1,
+            Id = 1,
             TournamentId = 1,
-            PlayerOne = "TestPlayerOne",
-            PlayerTwo = "TestPlayerTwo",
-            PlayerOneScore = 0,
-            PlayerTwoScore = 1
+            PlayerOneFirstName = "Test",
+            PlayerOneLastName = "Testovich",
+            PlayerTwoFirstName = "John",
+            PlayerTwoLastName = "Smith",
+            PlayerOneResult = "Win",
+            PlayerTwoResult = "Loss"
             },
         new Match {
-            MatchId = 2,
+            Id = 2,
             TournamentId = 1,
-            PlayerOne = "TestPlayerOne",
-            PlayerTwo = "TestPlayerTwo",
-            PlayerOneScore = 1,
-            PlayerTwoScore = 0
+            PlayerOneFirstName = "Test",
+            PlayerOneLastName = "Testovich",
+            PlayerTwoFirstName = "John",
+            PlayerTwoLastName = "Smith",
+            PlayerOneResult = "Loss",
+            PlayerTwoResult = "Win"
             },
         new Match {
-            MatchId = 3,
+            Id = 3,
             TournamentId = 1,
-            PlayerOne = "TestPlayerOne",
-            PlayerTwo = "TestPlayerTwo",
-            PlayerOneScore = 0,
-            PlayerTwoScore = 1
-            }
+            PlayerOneFirstName = "Test",
+            PlayerOneLastName = "Testovich",
+            PlayerTwoFirstName = "John",
+            PlayerTwoLastName = "Smith",
+            PlayerOneResult = "Win",
+            PlayerTwoResult = "Loss"
+            },
         };
     }
 }

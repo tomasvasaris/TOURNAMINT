@@ -16,32 +16,117 @@ namespace TournamintBackEnd.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
 
-            modelBuilder.Entity("Tournamint_BackEnd.Models.Match", b =>
+            modelBuilder.Entity("Tournamint_BackEnd.Models.LocalUser", b =>
                 {
-                    b.Property<int>("MatchId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("PlayerOne")
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("BLOB");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("BLOB");
+
+                    b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("PlayerOneScore")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("PlayerTwo")
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("PlayerTwoScore")
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Tournamint_BackEnd.Models.Match", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("PlayerOneFirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PlayerOneLastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PlayerOneResult")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PlayerTwoFirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PlayerTwoLastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PlayerTwoResult")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("TournamentId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("MatchId");
+                    b.HasKey("Id");
 
-                    b.ToTable("matches");
+                    b.ToTable("Matches");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PlayerOneFirstName = "Test",
+                            PlayerOneLastName = "Testovich",
+                            PlayerOneResult = "Win",
+                            PlayerTwoFirstName = "John",
+                            PlayerTwoLastName = "Smith",
+                            PlayerTwoResult = "Loss",
+                            TournamentId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            PlayerOneFirstName = "Test",
+                            PlayerOneLastName = "Testovich",
+                            PlayerOneResult = "Loss",
+                            PlayerTwoFirstName = "John",
+                            PlayerTwoLastName = "Smith",
+                            PlayerTwoResult = "Win",
+                            TournamentId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            PlayerOneFirstName = "Test",
+                            PlayerOneLastName = "Testovich",
+                            PlayerOneResult = "Win",
+                            PlayerTwoFirstName = "John",
+                            PlayerTwoLastName = "Smith",
+                            PlayerTwoResult = "Loss",
+                            TournamentId = 1
+                        });
+                });
+
+            modelBuilder.Entity("Tournamint_BackEnd.Models.MatchUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("LocalUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id", "LocalUserId");
+
+                    b.ToTable("MatchUser");
                 });
 #pragma warning restore 612, 618
         }

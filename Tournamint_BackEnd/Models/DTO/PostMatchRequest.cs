@@ -1,4 +1,6 @@
-﻿namespace Tournamint_BackEnd.Models.DTO
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Tournamint_BackEnd.Models.Dto
 {
     public class PostMatchRequest
     {
@@ -6,21 +8,35 @@
         /// ID number of the tournament where the match was played
         /// </summary>
         public int TournamentId { get; set; }
+
         /// <summary>
-        /// Name_Surname string of Player 01
+        /// The first name of Player One
         /// </summary>
-        public string? PlayerOne { get; set; }
+        public string? PlayerOneFirstName { get; set; }
+
         /// <summary>
-        /// Name_Surname string of Player 02
+        /// The last name of Player One
         /// </summary>
-        public string? PlayerTwo { get; set; }
+        public string? PlayerOneLastName { get; set; }
+
+        /// <summary>
+        /// The first name of Player Two
+        /// </summary>
+        public string? PlayerTwoFirstName { get; set; }
+
+        /// <summary>
+        /// The last name of Player Rwo
+        /// </summary>
+        public string? PlayerTwoLastName { get; set; }
+
         /// <summary>
         /// Match Score of Player 01
         /// </summary>
-        public int PlayerOneScore { get; set; }
+        public string? PlayerOneResult { get; set; }
+
         /// <summary>
         /// Match Score of Player 02
         /// </summary>
-        public int PlayerTwoScore { get; set; }
+        public string? PlayerTwoResult { get; set; }
     }
 }

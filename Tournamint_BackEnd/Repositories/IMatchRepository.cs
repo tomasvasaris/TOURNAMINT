@@ -2,5 +2,5 @@
 
 namespace Tournamint_BackEnd.Repositories
 {
-    public interface IMatchRepository : IRepository<Match> {}
+    public interface IMatchRepository : IRepository<Match> { }
 }
