@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Tournamint_BackEnd.props" />
+</Project>

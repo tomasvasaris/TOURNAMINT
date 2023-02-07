@@ -18,30 +18,32 @@ namespace TournamintBackEnd.Migrations
 
             modelBuilder.Entity("Tournamint_BackEnd.Models.Match", b =>
                 {
-                    b.Property<int>("MatchId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("PlayerOne")
+                    b.Property<string>("LoserFirstName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("PlayerOneScore")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("PlayerTwo")
+                    b.Property<string>("LoserLastName")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("PlayerTwoScore")
-                        .HasColumnType("INTEGER");
 
                     b.Property<int>("TournamentId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("MatchId");
+                    b.Property<string>("WinnerFirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
-                    b.ToTable("matches");
+                    b.Property<string>("WinnerLastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Matches");
                 });
 #pragma warning restore 612, 618
         }

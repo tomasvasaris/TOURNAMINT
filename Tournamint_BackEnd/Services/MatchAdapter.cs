@@ -1,45 +1,44 @@
 ﻿using Tournamint_BackEnd.Models;
-using Tournamint_BackEnd.Models.DTO;
+using Tournamint_BackEnd.Models.Dto;
 
 namespace Tournamint_BackEnd.Services
 {
     public class MatchAdapter : IMatchAdapter
     {
-        public GetMatchResult Bind(Match match)
+        public GetMatchResult Bind(Match Match)
         {
             return new GetMatchResult
             {
-                MatchId = match.MatchId,
-                TournamentId = match.TournamentId,
-                PlayerOne = match.PlayerOne,
-                PlayerTwo = match.PlayerTwo,
-                PlayerOneScore = match.PlayerOneScore,
-                PlayerTwoScore = match.PlayerTwoScore,
+                Id = Match.Id,
+                TournamentId = Match.TournamentId,
+                WinnerFirstName = Match.WinnerFirstName,
+                WinnerLastName = Match.WinnerLastName,
+                LoserFirstName = Match.LoserFirstName,
+                LoserLastName = Match.LoserLastName
             };
         }
-
-        public Match Bind(PostMatchRequest match)
+        public Match Bind(PostMatchRequest Match)
         {
             return new Match
             {
-                TournamentId = match.TournamentId,
-                PlayerOne = match.PlayerOne,
-                PlayerTwo = match.PlayerTwo,
-                PlayerOneScore = match.PlayerOneScore,
-                PlayerTwoScore = match.PlayerTwoScore,
+                TournamentId = Match.TournamentId,
+                WinnerFirstName = Match.WinnerFirstName,
+                WinnerLastName = Match.WinnerLastName,
+                LoserFirstName = Match.LoserFirstName,
+                LoserLastName = Match.LoserLastName
             };
         }
 
-        public Match Bind(PutMatchRequest match)
+        public Match Bind(PutMatchRequest Match)
         {
             return new Match
             {
-                MatchId = match.MatchId,
-                TournamentId = match.TournamentId,
-                PlayerOne = match.PlayerOne,
-                PlayerTwo = match.PlayerTwo,
-                PlayerOneScore = match.PlayerOneScore,
-                PlayerTwoScore = match.PlayerTwoScore,
+                Id = Match.Id,
+                TournamentId = Match.TournamentId,
+                WinnerFirstName = Match.WinnerFirstName,
+                WinnerLastName = Match.WinnerLastName,
+                LoserFirstName = Match.LoserFirstName,
+                LoserLastName = Match.LoserLastName,
             };
         }
     }

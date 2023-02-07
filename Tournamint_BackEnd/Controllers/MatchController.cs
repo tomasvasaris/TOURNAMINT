@@ -1,24 +1,25 @@
-﻿using System.Collections.Generic;
-using System.Net.Mime;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Tournamint_BackEnd.Models;
-using Tournamint_BackEnd.Models.DTO;
+using Tournamint_BackEnd.Models.Dto;
 using Tournamint_BackEnd.Repositories;
+using Microsoft.AspNetCore.Mvc;
+using System.Net.Mime;
 using Tournamint_BackEnd.Services;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Tournamint_BackEnd.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class MatchController : ControllerBase
     {
         private readonly ILogger<MatchController> _logger;
-        private readonly IRepository<Match> _repository;
+        private readonly IMatchRepository _repository;
         private readonly IMatchAdapter _adapter;
 
-        public MatchController(ILogger<MatchController> logger, 
-            IRepository<Match> repository,
+        public MatchController(ILogger<MatchController> logger,
+            IMatchRepository repository,
             IMatchAdapter adapter)
         {
             _logger = logger;
@@ -26,26 +27,8 @@ namespace Tournamint_BackEnd.Controllers
             _adapter = adapter;
         }
 
-
         /// <summary>
-        /// Receives all game matches and filters them based on tournament id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet("matches/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<GetMatchResult>))]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [Produces(MediaTypeNames.Application.Json)]
-        public IActionResult GetMatchesByTournamentID(int id)
-        {
-            var entities = _repository.All();
-            var model = entities.Select(x => _adapter.Bind(x).TournamentId == id);
-
-            return Ok(model);
-        }
-
-        /// <summary>
-        /// Receives a list of game matches from database
+        /// Get all matches from database
         /// </summary>
         /// <returns></returns>
         [HttpGet("matches/")]
@@ -64,17 +47,24 @@ namespace Tournamint_BackEnd.Controllers
         }
 
         /// <summary>
-        /// Receives a game match from database
+        /// Get all matches from database with provided id
         /// </summary>
         /// <returns></returns>
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetMatchResult))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Produces(MediaTypeNames.Application.Json)]
         public IActionResult Get(int id)
         {
-            if (!_repository.Exists(id))
+            if (!_repository.Exist(id))
+            {
+                _logger.LogInformation("Match with id {id} not found",id);
                 return NotFound();
-
+            }
+            
             var entity = _repository.Get(id);
             var model = _adapter.Bind(entity);
 
@@ -82,22 +72,45 @@ namespace Tournamint_BackEnd.Controllers
         }
 
         /// <summary>
-        /// Posts a game match to database
+        /// Get all or filtered matches by tournamentId from database
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<GetMatchResult>))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Produces(MediaTypeNames.Application.Json)]
+        public IActionResult Get([FromQuery]FilterMatchRequest req)
+        {
+            _logger.LogInformation("Getting Match list with parameters {req}", JsonConvert.SerializeObject(req));
+
+            IEnumerable<Match> entities = _repository.All().ToList();
+
+            if (req.TournamentId != null)
+                entities = entities.Where(x => x.TournamentId == req.TournamentId);
+
+            var model = entities?.Select(x => _adapter.Bind(x));
+            
+            return Ok(model);
+        }
+
+        /// <summary>
+        /// Post match to database
+        /// </summary>
+        /// <returns></returns>
+        /// <response code="400">Validation no bueno</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
-        public IActionResult Post([FromBody]PostMatchRequest req)
+        public IActionResult Post(PostMatchRequest req)
         {
             if (!ModelState.IsValid)
             {
                 return ValidationProblem(ModelState);
             }
-
+            
             var entity = _adapter.Bind(req);
             var id = _repository.Create(entity);
 
@@ -105,15 +118,15 @@ namespace Tournamint_BackEnd.Controllers
         }
 
         /// <summary>
-        /// Modifies a game match in database
+        /// Modify match in database
         /// </summary>
         /// <returns></returns>
+        /// <response code="400">Validation no bueno</response>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
         public IActionResult Put(PutMatchRequest req)
         {
@@ -122,31 +135,30 @@ namespace Tournamint_BackEnd.Controllers
                 return ValidationProblem(ModelState);
             }
 
-            if (!_repository.Exists(req.MatchId))
+            if (!_repository.Exist(req.Id))
             {
-                _logger.LogInformation("Car with id {id} not found", req.MatchId);
+                _logger.LogInformation("Match with id {id} not found", req.Id);
                 return NotFound();
             }
 
             var entity = _adapter.Bind(req);
-            _repository.Update(entity);
+           _repository.Update(entity);
 
             return NoContent();
         }
 
         /// <summary>
-        /// Delete a game match from database
+        /// Delete match from database
         /// </summary>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [Produces(MediaTypeNames.Application.Json)]
         public IActionResult Delete(int id)
         {
-            if (!_repository.Exists(id))
+            if (!_repository.Exist(id))
             {
-                _logger.LogInformation("Car with id {id} not found", id);
+                _logger.LogInformation("Match with id {id} not found", id);
                 return NotFound();
             }
             var entity = _repository.Get(id);

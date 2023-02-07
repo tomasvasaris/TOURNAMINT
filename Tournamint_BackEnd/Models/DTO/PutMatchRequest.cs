@@ -1,30 +1,37 @@
-﻿namespace Tournamint_BackEnd.Models.DTO
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Tournamint_BackEnd.Models.Dto
 {
     public class PutMatchRequest
     {
         /// <summary>
         /// ID number of the game match
         /// </summary>
-        public int MatchId { get; set; }
+        public int Id { get; set; }
+
         /// <summary>
         /// ID number of the tournament where the match was played
         /// </summary>
         public int TournamentId { get; set; }
+
         /// <summary>
-        /// Name_Surname string of Player 01
+        /// The first name of Player One
         /// </summary>
-        public string? PlayerOne { get; set; }
+        public string? WinnerFirstName { get; set; }
+
         /// <summary>
-        /// Name_Surname string of Player 02
+        /// The last name of Player One
         /// </summary>
-        public string? PlayerTwo { get; set; }
+        public string? WinnerLastName { get; set; }
+
         /// <summary>
-        /// Match Score of Player 01
+        /// The first name of Player Two
         /// </summary>
-        public int PlayerOneScore { get; set; }
+        public string? LoserFirstName { get; set; }
+
         /// <summary>
-        /// Match Score of Player 02
+        /// The last name of Player Rwo
         /// </summary>
-        public int PlayerTwoScore { get; set; }
+        public string? LoserLastName { get; set; }
     }
 }

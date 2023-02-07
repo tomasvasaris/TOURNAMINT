@@ -1,12 +1,14 @@
-﻿namespace Tournamint_BackEnd.Models
+﻿using Tournamint_BackEnd.Models.Dto;
+
+namespace Tournamint_BackEnd.Models
 {
     public class Match
     {
-        public int MatchId { get; set; }
+        public int Id { get; set; }
         public int TournamentId { get; set; }
-        public string? PlayerOne { get; set; }
-        public string? PlayerTwo { get; set; }
-        public int PlayerOneScore { get; set; }
-        public int PlayerTwoScore { get; set; }
+        public string? WinnerFirstName { get; set; }
+        public string? WinnerLastName { get; set; }
+        public string? LoserFirstName { get; set; }
+        public string? LoserLastName { get; set; }
     }
 }

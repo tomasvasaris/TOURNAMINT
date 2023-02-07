@@ -2,7 +2,7 @@
 
 namespace Tournamint_BackEnd.Repositories
 {
-    public interface IRepository<T>
+    public interface IRepository<T> where T: class, new()
     {
         IEnumerable<T> All();
         T Get(int id);
@@ -10,7 +10,7 @@ namespace Tournamint_BackEnd.Repositories
         void Update(T entity);
         void Remove(T entity);
         int Count();
-        bool Exists(int id);
+        bool Exist(int id);
         IEnumerable<T> Find(Expression<Func<T,bool>> predicate);
     }
 }
