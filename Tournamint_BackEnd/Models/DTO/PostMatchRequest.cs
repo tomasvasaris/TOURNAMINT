@@ -12,31 +12,21 @@ namespace Tournamint_BackEnd.Models.Dto
         /// <summary>
         /// The first name of Player One
         /// </summary>
-        public string? PlayerOneFirstName { get; set; }
+        public string? WinnerFirstName { get; set; }
 
         /// <summary>
         /// The last name of Player One
         /// </summary>
-        public string? PlayerOneLastName { get; set; }
+        public string? WinnerLastName { get; set; }
 
         /// <summary>
         /// The first name of Player Two
         /// </summary>
-        public string? PlayerTwoFirstName { get; set; }
+        public string? LoserFirstName { get; set; }
 
         /// <summary>
         /// The last name of Player Rwo
         /// </summary>
-        public string? PlayerTwoLastName { get; set; }
-
-        /// <summary>
-        /// Match Score of Player 01
-        /// </summary>
-        public string? PlayerOneResult { get; set; }
-
-        /// <summary>
-        /// Match Score of Player 02
-        /// </summary>
-        public string? PlayerTwoResult { get; set; }
+        public string? LoserLastName { get; set; }
     }
 }

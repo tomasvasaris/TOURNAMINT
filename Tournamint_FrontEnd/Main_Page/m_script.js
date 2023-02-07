@@ -117,14 +117,13 @@ function TournamentCreate() {
     if (tourType === "robin") {tourType = "Round Robin";}
     
     let tourParticipants = [];
-    let matches = [];
     tourParticipants.push(user);
 
     if (tourName === "" || tourType === "" || tourDate === "") {
         alert('All fields need to be filled in!');
 
     } else {
-        let tourney = {Name: tourName, Type: tourType, Date: tourDate, Players: tourParticipants, Matches: matches};
+        let tourney = {Name: tourName, Type: tourType, Date: tourDate, Players: tourParticipants};
         let tourneyList = [];
 
         if (JSON.parse(localStorage.getItem(0)) !== null) {
@@ -143,12 +142,25 @@ function TournamentCreate() {
 
 // See Tournament Table and Statistics
 
-var matches = {}; // every match from the selected tournament
-
 function SeeTable(itemno) {
+    let matches = []; // every match from the selected tournament
+    selectedTourNo = itemno;
+    
+    const urlGet = url + 'Match?TournamentId=' + selectedTourNo;
+
+    fetch(urlGet, options)
+    .then((response) => response.json())
+    .then((data) => {
+        sessionStorage.setItem('importedData', JSON.stringify(data));
+        matches = data;
+    })
+    .catch(error => console.log(error));
+
+    matches = JSON.parse(sessionStorage.getItem('importedData'));
+    console.log(matches);
+
     let tourneyList = JSON.parse(localStorage.getItem(0));
     const selectedTourn = tourneyList[itemno];
-    selectedTourNo = itemno;
 
     const allTournItems = document.getElementById("FieldStatsTable");
     allTournItems.innerHTML = "";
@@ -168,6 +180,7 @@ function SeeTable(itemno) {
 
     // 02 Tournament table
     let tournTable = "";
+
     selectedTourn.Players.forEach(player1 => {
         selectedTourn.Players.forEach(player2 => {
             if (player1.firstName === user.firstName && player1.lastName === user.lastName) {
@@ -177,22 +190,26 @@ function SeeTable(itemno) {
                 let p1score = '0';
                 let p2score = '0';
 
-                selectedTourn.Matches.forEach(match => {
-                    if(player1.firstName === match.WinnerFirstName &&
-                        player1.lastName === match.WinnerLastName &&
-                        player2.firstName === match.LoserFirstName &&
-                        player2.lastName === match.LoserLastName) {
+                matches.forEach(match => {
+                    console.log('enter');
+                    if (player1.firstName === match.winnerFirstName &&
+                        player1.lastName === match.winnerLastName &&
+                        player2.firstName === match.loserFirstName &&
+                        player2.lastName === match.loserLastName) {
+                            console.log('win');
                             p1score = 'W';
                             p2score = 'L';
                         };
-                    if(player1.firstName === match.LoserFirstName &&
-                        player1.lastName === match.LoserLastName &&
-                        player2.firstName === match.WinnerFirstName &&
-                        player2.lastName === match.WinnerLastName) {
+                    if (player1.firstName === match.loserFirstName &&
+                        player1.lastName === match.loserLastName &&
+                        player2.firstName === match.winnerFirstName &&
+                        player2.lastName === match.winnerLastName) {
+                            console.log('loss');
                             p1score = 'L';
                             p2score = 'W';
                         };
                 })
+
 
                 let score = p1score + '/' + p2score;
 
@@ -203,6 +220,7 @@ function SeeTable(itemno) {
         });
         tournTable = tournTable + "<br/>";
     });
+
     tournitem2.innerHTML = tournTable
 
     // Finish up
@@ -219,6 +237,8 @@ function SeeTable(itemno) {
 
 // Add Scores to Selected Tournament
 
+var enteredMatch = {};
+
 function TournamentAddScores() {
     let winnerFirstName = document.getElementById("WinnerFirstName").value;
     let winnerLastName = document.getElementById("WinnerLastName").value;
@@ -229,21 +249,15 @@ function TournamentAddScores() {
         alert('All fields need to be filled in!');
 
     } else {
-        let allTourneys = [];
-        allTourneys = JSON.parse(localStorage.getItem(0));
 
-        let match = {WinnerFirstName: winnerFirstName, 
+        enteredMatch = {WinnerFirstName: winnerFirstName, 
             WinnerLastName: winnerLastName, 
             LoserFirstName: loserFirstName, 
-            LoserLastName: loserLastName};
+            LoserLastName: loserLastName,
+            TournamentId: selectedTourNo};
             
-        console.log(allTourneys);
-        console.log(allTourneys[selectedTourNo]);
-        console.log(allTourneys[selectedTourNo].Matches);
-        console.log(match);
-
-        allTourneys[selectedTourNo].Matches.push(match);
-        localStorage.setItem(0, JSON.stringify(allTourneys));
+        sendData();
+        enteredMatch = {};
     
         document.getElementById("WinnerFirstName").value = "";
         document.getElementById("WinnerLastName").value = "";
@@ -302,3 +316,36 @@ function TournamentLeave() {
     }
 }
     
+
+// API part
+
+const url = 'https://localhost:7040/';
+
+// GET all matches
+
+const options = {
+    method: 'get',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+}
+
+const response = {};
+
+// POST new match
+
+function sendData() {
+    console.log(enteredMatch);
+    const urlPost = url + 'Match/';
+
+    fetch(urlPost, {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(enteredMatch) 
+    })
+    .catch((error) => console.log(error));
+}

@@ -14,14 +14,12 @@ namespace Tournamint_BackEnd.Database
         {
             modelBuilder.Entity<Match>().HasKey(x => x.Id);
             modelBuilder.Entity<Match>().Property(x => x.TournamentId).IsRequired();
-            modelBuilder.Entity<Match>().Property(x => x.PlayerOneFirstName).IsRequired();
-            modelBuilder.Entity<Match>().Property(x => x.PlayerOneLastName).IsRequired();
-            modelBuilder.Entity<Match>().Property(x => x.PlayerTwoFirstName).IsRequired();
-            modelBuilder.Entity<Match>().Property(x => x.PlayerTwoLastName).IsRequired();
-            modelBuilder.Entity<Match>().Property(x => x.PlayerOneResult).IsRequired();
-            modelBuilder.Entity<Match>().Property(x => x.PlayerTwoResult).IsRequired();
+            modelBuilder.Entity<Match>().Property(x => x.WinnerFirstName).IsRequired();
+            modelBuilder.Entity<Match>().Property(x => x.WinnerLastName).IsRequired();
+            modelBuilder.Entity<Match>().Property(x => x.LoserFirstName).IsRequired();
+            modelBuilder.Entity<Match>().Property(x => x.LoserLastName).IsRequired();
 
-            modelBuilder.Entity<Match>().HasData(MatchInitialData.DataSeed);
+            //modelBuilder.Entity<Match>().HasData(MatchInitialData.DataSeed);
         }
     }
 }

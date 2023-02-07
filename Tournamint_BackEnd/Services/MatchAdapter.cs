@@ -11,12 +11,10 @@ namespace Tournamint_BackEnd.Services
             {
                 Id = Match.Id,
                 TournamentId = Match.TournamentId,
-                PlayerOneFirstName = Match.PlayerOneFirstName,
-                PlayerOneLastName = Match.PlayerOneLastName,
-                PlayerTwoFirstName = Match.PlayerTwoFirstName,
-                PlayerTwoLastName = Match.PlayerTwoLastName,
-                PlayerOneResult = Match.PlayerOneResult,
-                PlayerTwoResult = Match.PlayerTwoResult
+                WinnerFirstName = Match.WinnerFirstName,
+                WinnerLastName = Match.WinnerLastName,
+                LoserFirstName = Match.LoserFirstName,
+                LoserLastName = Match.LoserLastName
             };
         }
         public Match Bind(PostMatchRequest Match)
@@ -24,12 +22,10 @@ namespace Tournamint_BackEnd.Services
             return new Match
             {
                 TournamentId = Match.TournamentId,
-                PlayerOneFirstName = Match.PlayerOneFirstName,
-                PlayerOneLastName = Match.PlayerOneLastName,
-                PlayerTwoFirstName = Match.PlayerTwoFirstName,
-                PlayerTwoLastName = Match.PlayerTwoLastName,
-                PlayerOneResult = Match.PlayerOneResult,
-                PlayerTwoResult = Match.PlayerTwoResult
+                WinnerFirstName = Match.WinnerFirstName,
+                WinnerLastName = Match.WinnerLastName,
+                LoserFirstName = Match.LoserFirstName,
+                LoserLastName = Match.LoserLastName
             };
         }
 
@@ -39,12 +35,10 @@ namespace Tournamint_BackEnd.Services
             {
                 Id = Match.Id,
                 TournamentId = Match.TournamentId,
-                PlayerOneFirstName = Match.PlayerOneFirstName,
-                PlayerOneLastName = Match.PlayerOneLastName,
-                PlayerTwoFirstName = Match.PlayerTwoFirstName,
-                PlayerTwoLastName = Match.PlayerTwoLastName,
-                PlayerOneResult = Match.PlayerOneResult,
-                PlayerTwoResult = Match.PlayerTwoResult
+                WinnerFirstName = Match.WinnerFirstName,
+                WinnerLastName = Match.WinnerLastName,
+                LoserFirstName = Match.LoserFirstName,
+                LoserLastName = Match.LoserLastName,
             };
         }
     }
